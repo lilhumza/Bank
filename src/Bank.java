@@ -2,7 +2,8 @@
 public class Bank {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//test account
+		ATM account = new ATM(1234,4321);
 
 	}
 
