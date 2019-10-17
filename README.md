@@ -13,3 +13,11 @@ Things to add:
 - Loans + Savings/Checking Accounts are possibilites. 
 - Make account number longer.
 - 
+
+#Update October 27, 2019
+-You can now withdraw money from you account
+
+#Needs Word (ATM)
+-updating user file with new amount of money
+-ability to cancel withdraw
+-add test cases where the user doesnt put in a number
