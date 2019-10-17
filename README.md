@@ -15,9 +15,9 @@ Things to add:
 - 
 
 ***Update October 27, 2019***
--You can now withdraw money from you account
+- You can now withdraw money from you account
 
 ***Needs Word (ATM)***
--updating user file with new amount of money
--ability to cancel withdraw
--add test cases where the user doesnt put in a number
+- updating user file with new amount of money
+- ability to cancel withdraw
+- add test cases where the user doesnt put in a number
