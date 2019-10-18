@@ -23,7 +23,7 @@ Things to add:
 
 ***Update October 18, 2019***
 - atm now works with new file layout
-- added method that exchanges usd -> cad and cad -> usd
+- added method that exchanges usd -> cad ＆ cad -> usd
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
