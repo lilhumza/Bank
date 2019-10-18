@@ -22,7 +22,7 @@ Things to add:
 - user can now exit ATM
 - cleaned up code
 
-***Needs Word (ATM)***
+***Needs Work (ATM)***
 - ability to cancel withdraw
 - add test cases where the user doesnt put in a number
 - better flow when withdrawing/depositing multiple times
