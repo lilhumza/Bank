@@ -23,7 +23,7 @@ Things to add:
 - cleaned up code
 
 ***Update October 18, 2019***
--atm now works with new filesystem
+- atm now works with new filesystem
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
