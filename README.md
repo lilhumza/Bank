@@ -24,3 +24,4 @@ Things to add:
 - ability to cancel withdraw
 - add test cases where the user doesnt put in a number
 - better flow when withdrawing/depositing multiple times
+- withdraw/deposit methods are very repetitive
