@@ -15,9 +15,12 @@ Things to add:
 - 
 
 ***Update October 27, 2019***
-- You can now withdraw money from your account
+- You can now withdraw/deposit money from your account
 - User files will now be updated with new balance
+- user can now withdraw/deposit multiple times
+- user can now exit ATM
 
 ***Needs Word (ATM)***
 - ability to cancel withdraw
 - add test cases where the user doesnt put in a number
+- better flow when withdrawing/depositing multiple times
