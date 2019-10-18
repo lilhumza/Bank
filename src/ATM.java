@@ -25,7 +25,7 @@ public class ATM {
 			  	double withdrawAmount = input.nextDouble();
 			  	double newBalance = balance - withdrawAmount;
 			  	newBalance = round(newBalance,2);
-			  	setVariable(accountNumber,3, Double.toString(newBalance));
+			  	updateBalance(accountNumber,3, Double.toString(newBalance));
 			  	System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance);
 			    break;
 			  case 2:
@@ -93,7 +93,7 @@ public class ATM {
 		return accountValues;
 	}
 
-	public static void setVariable(int accountNumber, int lineNumber, String data) throws IOException {
+	public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
 		Path path = Paths.get(Integer.toString(accountNumber));
 		List<String> lines = Files.readAllLines(path);
 		lines.set(lineNumber - 1, data);
