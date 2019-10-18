@@ -22,6 +22,9 @@ Things to add:
 - user can now exit ATM
 - cleaned up code
 
+***Update October 18, 2019***
+-atm now works with new filesystem
+
 ***Needs Work (ATM)***
 - ability to cancel withdraw
 - add test cases where the user doesnt put in a number
