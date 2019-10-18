@@ -1,7 +1,8 @@
 # Bank
-Abdul: ATM.java
-Humza: BankTeller.java
-Tarek: Account.java
+File Assignments:
+- Abdul: ATM.java
+- Humza: BankTeller.java
+- Tarek: Account.java
 
 Things to add:
 - Make accounts that are limited and do not have as much capabilites as main accounts (i.e. student/children accounts).
