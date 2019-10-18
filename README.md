@@ -19,6 +19,5 @@ Things to add:
 - User files will now be updated with new balance
 
 ***Needs Word (ATM)***
-- ~~- updating user file with new amount of money ~~
 - ability to cancel withdraw
 - add test cases where the user doesnt put in a number
