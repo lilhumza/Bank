@@ -112,4 +112,15 @@ public class ATM {
 		lines.set(lineNumber - 1, data);
 		Files.write(path, lines);
 	}
+	public double exchangeCurrency(String type, double amount){
+		//usd to cad
+		if (type == "usd"){
+			amount /= 0.76;
+		}
+		//cad to usd
+		else{
+			amount *= 0.76;
+		}
+		return amount;
+	}
 }
