@@ -1,63 +1,116 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BankTeller {
-	int cardNum;
-	int cardPin;
+	
+	Scanner input = new Scanner (System.in);
+	String fName;
+	String lName;
+	int accNum;
+	int accPin;
 	double balance;
 	ArrayList<String> transactionHistory;
 
-	
-	public BankTeller(int cardNumber, int cardPinNum, double inputBalance,	ArrayList<String> inputTransactionHistory) {
+	//New Account
+	public BankTeller() {
 		
-		this.cardNum = cardNumber;
-		this.cardPin = cardPinNum;
-		this.balance = inputBalance;
-		this.transactionHistory = inputTransactionHistory;
+		System.out.print("What is your first Name: ");
+		this.fName = input.nextLine();
+		System.out.print("\nWhat is your last Name: ");
+		this.lName = input.nextLine();
+		
+		this.accNum = (int) (Math.random() * ((9999-1000)+1)+1000);
+		System.out.println("Account Number: "+ accNum);
+		
+		this.accPin = (int) (Math.random() * ((9999-1000)+1)+1000);
+		System.out.println("Account Pin: "+ accPin);
+		
+		this.balance = 0.00;
+		this.transactionHistory = new ArrayList<String>();
 	}
 	
-	public void changeTransactionHistory(int param) {
-		System.out.println("Removing Transaction: "+transactionHistory.get(param));
-		System.out.println("Transaction History: ");
-		System.out.println(transactionHistory);
+	//Have account and want to change transaction history
+	public BankTeller (int accNumber) {
+		
+		//Create a file reader to pull info from txt file.
+		
+		this.accNum = accNumber;
+		
+		
+//		this.accPin = accPinNum;
+//		this.balance = inputBalance;
+//		this.transactionHistory = inputTransactionHistory;
+		
+	}
+	
+	public void changeTransactionHistory() {
+		
+		System.out.println("Current History: \n"+transactionHistory);
+		
+		if (transactionHistory.size() == 0) {
+			System.out.println("You Have No Transactions!");
+		} else {
+			
+			System.out.println("Remove Transaction at index:");
+			int index = input.nextInt();
+			System.out.println("Removing Transaction: "+transactionHistory.get(index));
+			transactionHistory.remove(index);
+			System.out.println("Updated Transaction History: \n"+transactionHistory);
+		}
 	}
 	
 	
-	public void closeAccount(String fileName) { //Parameter filename is the cardNum as a string aka foldername
+	public void closeAccount() throws IOException { //Parameter filename is the cardNum as a string aka foldername
 		
-		//Delete The Entire Folder of the client
+		String textFile = Integer.toString(accNum)+".txt";
 		
-		File file  = new File(fileName);
-        if(file.isDirectory()){
-            String[] childFiles = file.list();
-            if(childFiles == null) {
-                //Directory is empty. Proceed for deletion
-                file.delete();
-            }
-            else {
-                //Directory has other files.
-                //Need to delete them first
-                for (String childFilePath :  childFiles) {
-                    //recursive delete the files
-                    closeAccount(childFilePath);
-                }
-            }
-             
-        } else {
-            //it is a simple file. Proceed for deletion
-            file.delete();
-        }
-		System.out.println("Account Closed.");
+		try { 
+			 Files.deleteIfExists(Paths.get(textFile)); 
+	            
+	    } catch (NoSuchFileException e) {
+	    	 
+	    	System.out.println("No Account Exists"); 	 
+	    }
 	}
 	
 	public void writeInfo() {
 		//Write new history and stuff to the file
 		
+		String textFile = Integer.toString(accNum)+".txt";
+		
+		try {
+			
+			FileWriter out = new FileWriter(textFile);
+			BufferedWriter writeFile = new BufferedWriter(out);
+			
+			writeFile.write(fName);
+			writeFile.newLine();
+			writeFile.write(lName);
+			writeFile.newLine();
+			writeFile.write(String.valueOf(accNum));
+			writeFile.newLine();
+			writeFile.write(String.valueOf(accPin));
+			writeFile.newLine();
+			
+			if (transactionHistory.size() > 0) {
+				for (int i = 0; i < transactionHistory.size(); i++) {
+					writeFile.write(transactionHistory.get(i)+" ");
+				}
+			}
+			
+			writeFile.close();
+			out.close();
+			
+			System.out.println("Account Updated");
+			} catch (IOException e) {
+				System.err.println("IOException: " + e.getMessage());
+			}
 	}
-	
-	
-	
-	
-	
 
 }
