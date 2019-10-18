@@ -19,6 +19,7 @@ Things to add:
 - User files will now be updated with new balance
 - user can now withdraw/deposit multiple times
 - user can now exit ATM
+- cleaned up code
 
 ***Needs Word (ATM)***
 - ability to cancel withdraw
