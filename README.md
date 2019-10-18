@@ -14,7 +14,7 @@ Things to add:
 - Make account number longer.
 - 
 
-***Update October 27, 2019***
+***Update October 17, 2019***
 - You can now withdraw/deposit money from your account
 - User files will now be updated with new balance
 - user can now withdraw/deposit multiple times
