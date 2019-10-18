@@ -45,8 +45,8 @@ public class ATM {
 	
 	public void approveCredentials(int accountNumber, int pinNumber){
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-		storedAccountNumber = accountInfo.get(0);
-		storedPinNumber = accountInfo.get(1);
+		storedAccountNumber = accountInfo.get(2);
+		storedPinNumber = accountInfo.get(3);
 		if (accountNumber == Integer.parseInt(storedAccountNumber)){
 			if (pinNumber == Integer.parseInt(storedPinNumber)){
 				approved = true;
@@ -64,25 +64,25 @@ public class ATM {
 	
 	public void withdrawMoney(int accountNumber) throws IOException{
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-		double balance =  Double.parseDouble(accountInfo.get(2));
+		double balance =  Double.parseDouble(accountInfo.get(4));
 		balance = round(balance, 2);
 		System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
 		double withdrawAmount = input.nextDouble();
 		double newBalance = balance - withdrawAmount;
 		newBalance = round(newBalance,2);
-		updateBalance(accountNumber,3, Double.toString(newBalance));
+		updateBalance(accountNumber,5, Double.toString(newBalance));
 		System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance);
 	}
 
 	public void depositMoney(int accountNumber) throws IOException{
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-		double balance =  Double.parseDouble(accountInfo.get(2));
+		double balance =  Double.parseDouble(accountInfo.get(4));
 		balance = round(balance, 2);
 		System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
 		double depositAmount = input.nextDouble();
 		double newBalance = balance + depositAmount;
 		newBalance = round(newBalance,2);
-		updateBalance(accountNumber,3, Double.toString(newBalance));
+		updateBalance(accountNumber,5, Double.toString(newBalance));
 		System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance);
 	}
 	
@@ -102,6 +102,7 @@ public class ATM {
 			System.out.println("Account does not exist");
 			System.err.println("IOException: " + e.getMessage());
 		}
+		System.out.println(accountValues);
 		return accountValues;
 	}
 
