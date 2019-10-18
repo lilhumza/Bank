@@ -3,11 +3,7 @@ import java.math.*;
 import java.util.*;
 import java.nio.file.*;
 public class ATM {
-
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
-	static StringTokenizer st;
-
+	
 	int accountNumber;
 	String storedAccountNumber;
 	int pinNumber;
@@ -16,16 +12,17 @@ public class ATM {
 	boolean approved = false;
 	
 	public ATM (int accountNumber, int pinNumber) throws IOException{
+		Scanner input = new Scanner(System.in);
 		approveCredentials(accountNumber, pinNumber);
 		if (approved) {
 			System.out.println("Welcome to the ATM. What would you like to do? \nWithdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
-			int choice = readInt();
+			int choice = input.nextInt();
 			switch(choice) {
 			  case 1:
 			  	balance = withdrawMoney(accountNumber);
 			  	balance = round(balance, 2);
 			  	System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
-			  	double withdrawAmount = readDouble();
+			  	double withdrawAmount = input.nextDouble();
 			  	double newBalance = balance - withdrawAmount;
 			  	newBalance = round(newBalance,2);
 			  	setVariable(accountNumber,3, Double.toString(newBalance));
@@ -101,27 +98,5 @@ public class ATM {
 		List<String> lines = Files.readAllLines(path);
 		lines.set(lineNumber - 1, data);
 		Files.write(path, lines);
-	}
-
-	static String next () throws IOException {
-		while (st == null || !st.hasMoreTokens())
-			st = new StringTokenizer(br.readLine().trim());
-		return st.nextToken();
-	}
-
-	static long readLong () throws IOException {
-		return Long.parseLong(next());
-	}
-
-	static int readInt () throws IOException {
-		return Integer.parseInt(next());
-	}
-
-	static double readDouble () throws IOException {
-		return Double.parseDouble(next());
-	}
-
-	static String readLine () throws IOException {
-		return br.readLine().trim();
 	}
 }
