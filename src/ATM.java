@@ -4,48 +4,42 @@ import java.util.*;
 import java.nio.file.*;
 public class ATM {
 	
-	int accountNumber;
 	String storedAccountNumber;
-	int pinNumber;
 	String storedPinNumber;
-	double balance;
 	boolean approved = false;
+	boolean exit = false;
+	Scanner input = new Scanner(System.in);
 	
 	public ATM (int accountNumber, int pinNumber) throws IOException{
-		Scanner input = new Scanner(System.in);
 		approveCredentials(accountNumber, pinNumber);
+		System.out.println("Welcome to the ATM. What would you like to do? ");
 		if (approved) {
-			System.out.println("Welcome to the ATM. What would you like to do? \nWithdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
-			int choice = input.nextInt();
-			switch(choice) {
-			  case 1:
-			  	balance = withdrawMoney(accountNumber);
-			  	balance = round(balance, 2);
-			  	System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
-			  	double withdrawAmount = input.nextDouble();
-			  	double newBalance = balance - withdrawAmount;
-			  	newBalance = round(newBalance,2);
-			  	updateBalance(accountNumber,3, Double.toString(newBalance));
-			  	System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance);
-			    break;
-			  case 2:
-			    
-			    break;
-			  case 3:
-				    
-			  	break;
-			  case 4:
-				    
-			  	break;
-			  case 5:
-				    
-			  	break;
-			  default:
-			    
+			while(!exit) {
+				System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
+				int choice = input.nextInt();
+				switch (choice) {
+					case 1:
+						withdrawMoney(accountNumber);
+						break;
+					case 2:
+						depositMoney(accountNumber);
+						break;
+					case 3:
+
+						break;
+					case 4:
+
+						break;
+					case 5:
+						exit = true;
+						break;
+					default:
+
+				}
 			}
 		}
 		else{
-			System.out.println("The account number or pin Number is incorrect.");
+			System.out.println("Pin number associated with account is incorrect.");
 		}
 	}
 	
@@ -68,10 +62,28 @@ public class ATM {
 		return bd.doubleValue();
 	}
 	
-	public double withdrawMoney(int accountNumber){
+	public void withdrawMoney(int accountNumber) throws IOException{
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
 		double balance =  Double.parseDouble(accountInfo.get(2));
-		return balance;
+		balance = round(balance, 2);
+		System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
+		double withdrawAmount = input.nextDouble();
+		double newBalance = balance - withdrawAmount;
+		newBalance = round(newBalance,2);
+		updateBalance(accountNumber,3, Double.toString(newBalance));
+		System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance);
+	}
+
+	public void depositMoney(int accountNumber) throws IOException{
+		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
+		double balance =  Double.parseDouble(accountInfo.get(2));
+		balance = round(balance, 2);
+		System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
+		double depositAmount = input.nextDouble();
+		double newBalance = balance + depositAmount;
+		newBalance = round(newBalance,2);
+		updateBalance(accountNumber,3, Double.toString(newBalance));
+		System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance);
 	}
 	
 	public ArrayList<String> readAccountInfo(int name) {
@@ -87,7 +99,7 @@ public class ATM {
 			readFile.close();
 			in.close();
 		} catch (Exception e) {
-			System.out.println("Problem opening account.");
+			System.out.println("Account does not exist");
 			System.err.println("IOException: " + e.getMessage());
 		}
 		return accountValues;
