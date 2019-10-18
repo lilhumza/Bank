@@ -10,7 +10,6 @@ Things to add:
  - For the security questions, make an arraylist that the questions are added to, and make it keep reminding them.
 - Transfer balances from one account to another account.
 - Include a bankruptcy option, that happens when all accounts have no money inside of them.
-- Currency exchange (e.g. CAD -> USD)
 - Loans + Savings/Checking Accounts are possibilites. 
 - Make account number longer.
 - 
@@ -24,6 +23,7 @@ Things to add:
 
 ***Update October 18, 2019***
 - atm now works with new file layout
+- added method that exchanges usd -> cad and cad -> usd
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
