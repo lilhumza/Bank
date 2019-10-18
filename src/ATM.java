@@ -11,6 +11,8 @@ public class ATM {
 	Scanner input = new Scanner(System.in);
 	
 	public ATM (int accountNumber, int pinNumber) throws IOException{
+		String line32 = Files.readAllLines(Paths.get("1234")).get(3);
+		System.out.println(line32);
 		approveCredentials(accountNumber, pinNumber);
 		System.out.println("Welcome to the ATM. What would you like to do? ");
 		if (approved) {
@@ -102,16 +104,9 @@ public class ATM {
 			System.out.println("Account does not exist");
 			System.err.println("IOException: " + e.getMessage());
 		}
-		System.out.println(accountValues);
 		return accountValues;
 	}
-
-	public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
-		Path path = Paths.get(Integer.toString(accountNumber));
-		List<String> lines = Files.readAllLines(path);
-		lines.set(lineNumber - 1, data);
-		Files.write(path, lines);
-	}
+	
 	public double exchangeCurrency(String type, double amount){
 		//usd to cad
 		if (type == "usd"){
@@ -122,5 +117,12 @@ public class ATM {
 			amount *= 0.76;
 		}
 		return amount;
+	}
+
+	public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
+		Path path = Paths.get(Integer.toString(accountNumber));
+		List<String> lines = Files.readAllLines(path);
+		lines.set(lineNumber - 1, data);
+		Files.write(path, lines);
 	}
 }
