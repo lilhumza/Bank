@@ -33,7 +33,8 @@ public class BankTeller {
 	
 	//Have account and want to change transaction history
 	public BankTeller (int accNumber) {
-		
+		//Check if file exists, then pull data from text file
+		//Else throw an error to user
 		//Create a file reader to pull info from txt file.
 		
 		this.accNum = accNumber;
@@ -67,9 +68,9 @@ public class BankTeller {
 		String textFile = Integer.toString(accNum)+".txt";
 		
 		try { 
-			 Files.deleteIfExists(Paths.get(textFile)); 
+			Files.deleteIfExists(Paths.get(textFile)); 
 	            
-	    } catch (NoSuchFileException e) {
+	    	} catch (NoSuchFileException e) {
 	    	 
 	    	System.out.println("No Account Exists"); 	 
 	    }
