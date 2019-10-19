@@ -26,6 +26,7 @@ Things to add:
 - added method that exchanges usd -> cad ＆ cad -> usd
 - deposits/withdraws will now be added to users account
 - user can now view tranaction history
+- moved some code around
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
