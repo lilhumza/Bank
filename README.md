@@ -28,7 +28,7 @@ Things to add:
 - atm now works with new file layout
 - added method that exchanges usd -> cad ＆ cad -> usd
 - deposits/withdraws will now be added to users account
-- user can now view tranaction history
+- user can now view trasaction history
 - moved some code around
 
 ***Needs Work (ATM)***
