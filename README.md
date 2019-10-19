@@ -30,6 +30,5 @@ Things to add:
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
-- add test cases where the user doesnt put in a number
-- better flow when withdrawing/depositing multiple times
-- withdraw/deposit methods are very repetitive
+- linking ATM and Bank Teller via main
+
