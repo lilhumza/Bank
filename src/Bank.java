@@ -5,7 +5,11 @@ public class Bank {
 	public static void main(String[] args) throws IOException{
 
 		Scanner input = new Scanner(System.in);
-
+		
+		//need the created accountNumber & Pin
+		//need any requests to change/cancel withdraw/deposit
+		//create cases where user asks for something from bankteller
+		
 		ATM account = new ATM(1234,4321);
 		System.out.println("Welcome to the ATM. What would you like to do? ");
 		boolean approved = account.approveCredentials(1234,4321);
