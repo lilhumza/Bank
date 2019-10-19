@@ -24,6 +24,8 @@ Things to add:
 ***Update October 18, 2019***
 - atm now works with new file layout
 - added method that exchanges usd -> cad ＆ cad -> usd
+- deposits/withdraws will now be added to users account
+- user can now view tranaction history
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
