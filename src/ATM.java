@@ -3,57 +3,36 @@ import java.math.*;
 import java.util.*;
 import java.nio.file.*;
 public class ATM {
-	
+
 	String storedAccountNumber;
 	String storedPinNumber;
 	boolean approved = false;
 	boolean exit = false;
 	Scanner input = new Scanner(System.in);
-	
+
 	public ATM (int accountNumber, int pinNumber) throws IOException{
-		String line32 = Files.readAllLines(Paths.get("1234")).get(3);
-		System.out.println(line32);
+		super();
+		this.exit = exit;
 		approveCredentials(accountNumber, pinNumber);
-		System.out.println("Welcome to the ATM. What would you like to do? ");
-		if (approved) {
-			while(!exit) {
-				System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
-				int choice = input.nextInt();
-				switch (choice) {
-					case 1:
-						withdrawMoney(accountNumber);
-						break;
-					case 2:
-						depositMoney(accountNumber);
-						break;
-					case 3:
 
-						break;
-					case 4:
-
-						break;
-					case 5:
-						exit = true;
-						break;
-					default:
-
-				}
-			}
-		}
-		else{
-			System.out.println("Pin number associated with account is incorrect.");
-		}
 	}
-	
-	public void approveCredentials(int accountNumber, int pinNumber){
+
+	public boolean approveCredentials(int accountNumber, int pinNumber){
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
 		storedAccountNumber = accountInfo.get(2);
 		storedPinNumber = accountInfo.get(3);
 		if (accountNumber == Integer.parseInt(storedAccountNumber)){
 			if (pinNumber == Integer.parseInt(storedPinNumber)){
-				approved = true;
+				return approved = true;
 			}
 		}
+		return approved = false;
+	}
+
+	public void transactionHistory(int accountNumber) throws IOException{
+		String fileName = Integer.toString(accountNumber);
+		String line32 = Files.readAllLines(Paths.get(fileName)).get(5);
+		System.out.println("\nTransaction History\n" + line32 + "\n");
 	}
 
 	public static double round(double value, int places) {
@@ -63,7 +42,7 @@ public class ATM {
 		bd = bd.setScale(places, RoundingMode.HALF_UP);
 		return bd.doubleValue();
 	}
-	
+
 	public void withdrawMoney(int accountNumber) throws IOException{
 		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
 		double balance =  Double.parseDouble(accountInfo.get(4));
@@ -73,7 +52,9 @@ public class ATM {
 		double newBalance = balance - withdrawAmount;
 		newBalance = round(newBalance,2);
 		updateBalance(accountNumber,5, Double.toString(newBalance));
-		System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance);
+		System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance +"\n");
+		String history = "-" + Double.toString(withdrawAmount);
+		updateTransactionHistory(accountNumber, history);
 	}
 
 	public void depositMoney(int accountNumber) throws IOException{
@@ -85,9 +66,11 @@ public class ATM {
 		double newBalance = balance + depositAmount;
 		newBalance = round(newBalance,2);
 		updateBalance(accountNumber,5, Double.toString(newBalance));
-		System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance);
+		System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance + "\n");
+		String history = "+" + Double.toString(depositAmount);
+		updateTransactionHistory(accountNumber, history);
 	}
-	
+
 	public ArrayList<String> readAccountInfo(int name) {
 		String fileName = Integer.toString(name);
 		ArrayList<String> accountValues = new ArrayList<String>();
@@ -106,7 +89,7 @@ public class ATM {
 		}
 		return accountValues;
 	}
-	
+
 	public double exchangeCurrency(String type, double amount){
 		//usd to cad
 		if (type == "usd"){
@@ -125,4 +108,19 @@ public class ATM {
 		lines.set(lineNumber - 1, data);
 		Files.write(path, lines);
 	}
+	public static void updateTransactionHistory(int accountNumber, String data) throws IOException {
+		String fileName = Integer.toString(accountNumber);
+		try {
+			FileWriter in = new FileWriter(fileName, true);
+			BufferedWriter bw = new BufferedWriter(in);
+			bw.write(data);
+			bw.close();
+			in.close();
+		} catch (Exception e) {
+			System.out.println("Account does not exist");
+			System.err.println("IOException: " + e.getMessage());
+		}
+
+	}
+
 }
