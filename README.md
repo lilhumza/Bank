@@ -35,3 +35,6 @@ Things to add:
 - ability to cancel withdraw
 - linking ATM and Bank Teller via main
 
+***Question***
+- alright, so I added a file called "BankQuestion" and basically that's the main in my code
+- should I use the main class "Bank" that the github has, or can we replace that file with mine? 
