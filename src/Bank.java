@@ -9,7 +9,6 @@ public class Bank {
 		int accountNumber = input.nextInt();
 		int accountPin = input.nextInt();
 		
-		//ATM SECTION
 		ATM account = new ATM(accountNumber,accountPin);
 		System.out.println("Welcome to the ATM. What would you like to do? ");
 		boolean approved = account.approveCredentials(accountNumber,accountPin);
@@ -29,7 +28,7 @@ public class Bank {
 						account.transactionHistory(accountNumber);
 						break;
 					case 4:
-
+						account.currentBankBalance(accountNumber);
 						break;
 					case 5:
 						exit = true;
