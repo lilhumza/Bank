@@ -6,13 +6,13 @@ public class Bank {
 
 		Scanner input = new Scanner(System.in);
 		
-		//need the created accountNumber & Pin
-		//need any requests to change/cancel withdraw/deposit
-		//create cases where user asks for something from bankteller
+		int accountNumber = input.nextInt();
+		int accountPin = input.nextInt();
 		
-		ATM account = new ATM(1234,4321);
+		//ATM SECTION
+		ATM account = new ATM(accountNumber,accountPin);
 		System.out.println("Welcome to the ATM. What would you like to do? ");
-		boolean approved = account.approveCredentials(1234,4321);
+		boolean approved = account.approveCredentials(accountNumber,accountPin);
 		boolean exit = account.exit;
 		if (approved) {
 			while(!exit) {
@@ -20,13 +20,13 @@ public class Bank {
 				int choice = input.nextInt();
 				switch (choice) {
 					case 1:
-						account.withdrawMoney(1234);
+						account.withdrawMoney(accountNumber);
 						break;
 					case 2:
-						account.depositMoney(1234);
+						account.depositMoney(accountNumber);
 						break;
 					case 3:
-						account.transactionHistory(1234);
+						account.transactionHistory(accountNumber);
 						break;
 					case 4:
 
