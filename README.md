@@ -1,6 +1,5 @@
 # Bank
 
-***Commit to test instead of master***
 
 File Assignments:
 - Abdul: ATM.java
