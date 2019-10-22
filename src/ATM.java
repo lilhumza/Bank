@@ -29,10 +29,13 @@ public class ATM {
 		return approved = false;
 	}
 
-	public void transactionHistory(int accountNumber) throws IOException{
+	public String transactionHistory(int accountNumber, boolean t) throws IOException{
 		String fileName = Integer.toString(accountNumber);
-		String line32 = Files.readAllLines(Paths.get(fileName)).get(5);
-		System.out.println("\nTransaction History\n" + line32 + "\n");
+		String line = Files.readAllLines(Paths.get(fileName)).get(5);
+		if (t){
+			System.out.println("\nTransaction History\n" + line + "\n");
+		}
+		return line;
 	}
 
 	public static double round(double value, int places) {
@@ -108,18 +111,26 @@ public class ATM {
 		lines.set(lineNumber - 1, data);
 		Files.write(path, lines);
 	}
-	public static void updateTransactionHistory(int accountNumber, String data) throws IOException {
+	public void updateTransactionHistory(int accountNumber, String data) throws IOException {
+		String tH = transactionHistory(accountNumber, false);
 		String fileName = Integer.toString(accountNumber);
-		try {
-			FileWriter in = new FileWriter(fileName, true);
-			BufferedWriter bw = new BufferedWriter(in);
-			bw.write(data);
-			bw.close();
-			in.close();
-		} catch (Exception e) {
-			System.out.println("Account does not exist");
-			System.err.println("IOException: " + e.getMessage());
-		}
+		RandomAccessFile f = new RandomAccessFile(fileName, "rw");
+		long length = f.length() - 1;
+		byte b;
+		do {
+			length -= 1;
+			f.seek(length);
+			b = f.readByte();
+		} while(b != 10);
+		f.setLength(length+1);
+		f.close();
+
+		tH += (" " + data);
+		FileWriter in = new FileWriter(fileName, true);
+		BufferedWriter bw = new BufferedWriter(in);
+		bw.write(tH);
+		bw.close();
+		in.close();
 
 	}
 
