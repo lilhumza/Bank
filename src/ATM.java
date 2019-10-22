@@ -133,5 +133,11 @@ public class ATM {
 		in.close();
 
 	}
+	
+	public void currentBankBalance(int accountNumber) throws IOException{
+		String fileName = Integer.toString(accountNumber);
+		String line = Files.readAllLines(Paths.get(fileName)).get(4);
+		System.out.println("Your current balance is: " + line);
+	}
 
 }
