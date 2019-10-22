@@ -25,7 +25,7 @@ public class Bank {
 						account.depositMoney(accountNumber);
 						break;
 					case 3:
-						account.transactionHistory(accountNumber);
+						account.transactionHistory(accountNumber, true);
 						break;
 					case 4:
 						account.currentBankBalance(accountNumber);
