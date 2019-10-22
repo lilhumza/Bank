@@ -44,7 +44,3 @@ Things to add:
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
 - Need to include the balance in text files and BankTeller Methods
-
-***Question***
-- alright, so I added a file called "BankQuestion" and basically that's the main in my code
-- should I use the main class "Bank" that the github has, or can we replace that file with mine? 
