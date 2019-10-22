@@ -30,6 +30,9 @@ Things to add:
 - user can now view trasaction history
 - moved some code around
 
+***Update October 21, 2019***
+- transaction history is now properly written to file
+
 ***Needs Work (ATM)***
 - ability to cancel withdraw
 - linking ATM and Bank Teller via main
