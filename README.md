@@ -37,6 +37,8 @@ Things to add:
 - Can create and alter accounts
 - Reads the text file into variables.
 
+***Update October 22, 2019***
+- user can now exchange currency
 
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
