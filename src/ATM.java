@@ -93,14 +93,18 @@ public class ATM {
 		return accountValues;
 	}
 
-	public double exchangeCurrency(String type, double amount){
-		//usd to cad
-		if (type == "usd"){
+	public double exchangeCurrency(int type, double amount){
+
+		if (type == 1){
 			amount /= 0.76;
+			round(amount, 2);
+			System.out.println("Converted to " + amount + " CAD");
 		}
 		//cad to usd
 		else{
 			amount *= 0.76;
+			round(amount, 2);
+			System.out.println("Converted to " + amount + " USD");
 		}
 		return amount;
 	}
