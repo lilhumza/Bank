@@ -35,7 +35,6 @@ Things to add:
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
-- linking ATM and Bank Teller via main
 
 ***Question***
 - alright, so I added a file called "BankQuestion" and basically that's the main in my code
