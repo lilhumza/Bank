@@ -32,6 +32,7 @@ Things to add:
 
 ***Update October 21, 2019***
 - transaction history is now properly written to file
+- user can now ask for Bank Balance Enquiry
 
 ***Needs Work (ATM)***
 - ability to cancel withdraw
