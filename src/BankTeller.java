@@ -1,7 +1,11 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.*;
-import java.nio.file.*;
-import java.util.*;
-
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BankTeller {
 	
@@ -11,7 +15,7 @@ public class BankTeller {
 	int accNum;
 	int accPin;
 	double balance;
-	ArrayList<String> transactionHistory;
+	ArrayList<String> transactionHistory = new ArrayList<String>();
 
 	//New Account
 	public BankTeller() {
@@ -21,6 +25,7 @@ public class BankTeller {
 		System.out.print("\nWhat is your last Name: ");
 		this.lName = input.nextLine();
 		
+		System.out.println("Your New Banking Information:");
 		this.accNum = (int) (Math.random() * ((9999-1000)+1)+1000);
 		System.out.println("Account Number: "+ accNum);
 		
@@ -28,24 +33,65 @@ public class BankTeller {
 		System.out.println("Account Pin: "+ accPin);
 		
 		this.balance = 0.00;
-		this.transactionHistory = new ArrayList<String>();
+		
+		
+		
 	}
 	
 	//Have account and want to change transaction history
 	public BankTeller (int accNumber) {
-		//Check if file exists, then pull data from text file
-		//Else throw an error to user
+		
 		//Create a file reader to pull info from txt file.
 		
 		this.accNum = accNumber;
 		
+		String textFile = Integer.toString(accNum)+".txt";
 		
-//		this.accPin = accPinNum;
-//		this.balance = inputBalance;
-//		this.transactionHistory = inputTransactionHistory;
+		 try {
+		      FileReader in = new FileReader(textFile);
+		      BufferedReader readFile = new BufferedReader(in);
+
+		      this.fName = readFile.readLine(); //Reads first line and adds to fName
+		      this.lName = readFile.readLine(); //Reads second line and adds to lName
+		      this.accNum = Integer.parseInt(readFile.readLine()); //Reads third line and adds to accNum
+		      this.accPin = Integer.parseInt(readFile.readLine()); //Reads fourth line and adds to accPin
+		      
+		      String[] splitStr = readFile.readLine().split(" ");
+		      
+		      for (int i = 0; i < splitStr.length; i++){
+		        this.transactionHistory.add(splitStr[i]);
+		      }
+		      readFile.close();
+
+		    } catch (IOException e) {
+				System.err.println("IOException: " + e.getMessage());
+		}
 		
 	}
-	
+	public void toDoPrompt() throws IOException {
+		
+		System.out.println("What would you like to do?\n1. Deposit\n2. Withdraw\n3. Change Transaction History\n4. Close Account\n5. Finished");
+		switch (input.nextInt()) {
+		case 1:
+			System.out.println("Enter deposit amount:");
+			break;
+		case 2:
+			System.out.println("Enter witdrawal amount: ");
+			break;
+		case 3:
+			changeTransactionHistory();
+			break;
+		case 4:
+			closeAccount();
+			break;
+		case 5:
+			writeInfo();
+			break;
+		default:
+		System.out.println("Done Messed Up Young Blood");
+		}
+	}
+
 	public void changeTransactionHistory() {
 		
 		System.out.println("Current History: \n"+transactionHistory);
@@ -59,6 +105,7 @@ public class BankTeller {
 			System.out.println("Removing Transaction: "+transactionHistory.get(index));
 			transactionHistory.remove(index);
 			System.out.println("Updated Transaction History: \n"+transactionHistory);
+			writeInfo();
 		}
 	}
 	
@@ -68,9 +115,11 @@ public class BankTeller {
 		String textFile = Integer.toString(accNum)+".txt";
 		
 		try { 
+			 
 			Files.deleteIfExists(Paths.get(textFile)); 
+			System.out.println("Sucessfully Closed Account");
 	            
-	    	} catch (NoSuchFileException e) {
+	    } catch (NoSuchFileException e) {
 	    	 
 	    	System.out.println("No Account Exists"); 	 
 	    }
@@ -105,9 +154,9 @@ public class BankTeller {
 			out.close();
 			
 			System.out.println("Account Updated");
-			} catch (IOException e) {
+		} catch (IOException e) {
 				System.err.println("IOException: " + e.getMessage());
-			}
+		}
 	}
 
 }
