@@ -15,7 +15,7 @@ public class Bank {
 		boolean exit = account.exit;
 		if (approved) {
 			while(!exit) {
-				System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
+				System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
 				int choice = input.nextInt();
 				switch (choice) {
 					case 1:
@@ -25,14 +25,27 @@ public class Bank {
 						account.depositMoney(accountNumber);
 						break;
 					case 3:
-						account.transactionHistory(accountNumber, true);
+						account.transactionHistory(accountNumber,true);
 						break;
 					case 4:
 						account.currentBankBalance(accountNumber);
 						break;
 					case 5:
-						exit = true;
+						System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
+						choice = input.nextInt();
+						if (choice == 1){
+							System.out.println("Please enter your USD");
+							double money = input.nextDouble();
+							account.exchangeCurrency(1, money);
+						}
+						else{
+							System.out.println("Please enter your CAD");
+							double money = input.nextDouble();
+							account.exchangeCurrency(2, money);
+						}
 						break;
+					case 6:
+						exit = true;
 					default:
 
 				}
