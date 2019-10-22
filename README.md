@@ -44,3 +44,4 @@ Things to add:
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
 - Need to include the balance in text files and BankTeller Methods
+- ability to view stats
