@@ -7,15 +7,15 @@ public class Bank {
 		
 		// variables
 		
-		String firstName, lastName, optionS;
-		int option;
+		String firstName, lastName;
+		int option, accountNumber;
 		Scanner input = new Scanner (System.in);
 		
 		java.util.Date date = new java.util.Date();
 		
 		//  user interaction
 		
-		System.out.println("TD Banking  " + date);
+		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
 		System.out.println("");
@@ -26,22 +26,12 @@ public class Bank {
 		System.out.println("What is your last name?");	
 		lastName = input.nextLine();
 		System.out.println("Your account information has been generated.");
-		System.out.println("");
 
 		Account account = new Account (firstName, lastName);
-		int accountNum = account.accountNum;
-		account.readFile(accountNum);
-
-		System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM./n3. Check your account information.");
-		
-		optionS = input.nextLine();
-		option = Integer.parseInt(optionS);
-		
-		System.out.println("");
-		
-		while (option!=4)
-		{	
-		
+		System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.");
+		option = input.nextInt();
+			
+		if (option != 4) {
 		switch(option) {
 		  case 1:
 			  System.out.println("Welcome to the Bank Teller!\n1. To access your existing account\n2. To create a new account");
@@ -73,7 +63,7 @@ public class Bank {
 				boolean exit = account.exit;
 				if (approved) {
 					while(!exit) {
-						System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExit (5)");
+						System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
 						int choice = input.nextInt();
 						switch (choice) {
 							case 1:
@@ -83,30 +73,41 @@ public class Bank {
 								account.depositMoney(accountNumber);
 								break;
 							case 3:
-								account.transactionHistory(accountNumber, true);
 								break;
 							case 4:
 								account.currentBankBalance(accountNumber);
 								break;
 							case 5:
-								exit = true;
+								System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
+								choice = input.nextInt();
+								if (choice == 1){
+									System.out.println("Please enter your USD");
+									double money = input.nextDouble();
+									account.exchangeCurrency(1, money);
+								}
+								else{
+									System.out.println("Please enter your CAD");
+									double money = input.nextDouble();
+									account.exchangeCurrency(2, money);
+								}
 								break;
+							case 6:
+								exit = true;
+							default:	
+							
 						}
 					}
 				}
 				
 				case 3: 
-					  
-					Account accountAccess = new Account(accountNum);
-					System.out.println("To access your account information, please enter your account number.");
-					option = input.nextInt();
-					account.readFile(option);	
 					
-					System.out.println("Your first name is " + account.firstName);
+					account.readFile(account.accountNum);	
+					
+					/*System.out.println("Your first name is " + account.firstName);
 					System.out.println("Your last name is " + account.lastName);
 					System.out.println("Your account card number is " + account.accountNum);
 					System.out.println("Your specialized PIN is " + account.pin);
-					System.out.println("Your account balance is " + account.balance);
+					System.out.println("Your account balance is " + account.balance);*/
 				    break;
 		  	    	
 				case 4:
