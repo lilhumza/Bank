@@ -41,7 +41,7 @@ Things to add:
 - user can now exchange currency
 
 ***Update October 23, 2019***
-- ATM now uses .txt files
+- ATM now only supports .txt files
 
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
