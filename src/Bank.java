@@ -7,7 +7,7 @@ public class Bank {
 		
 		// variables
 		
-		String firstName, lastName;
+		String firstName, lastName, userStatus;
 		int option, accountPin, accountNumber;
 		Scanner input = new Scanner (System.in);
 		
@@ -18,18 +18,31 @@ public class Bank {
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
-		BankTeller account = new BankTeller ();
-		
-		System.out.println("Your account information has been generated.");
-
-		System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.");
-		option = input.nextInt();
+		System.out.println("Are you an existing user?");
+		userStatus = input.nextLine();
+		if (userStatus.equals("Yes."))
+		userInput();
+		else if (userStatus.equals("No.")) {
+			BankTeller account = new BankTeller ();
+			account.justWrite();
+			userInput();
+		}
+	}
+	
+	public static void userInput () throws IOException {
+	
+	String firstName, lastName;
+	int option, accountPin, accountNumber;
+	Scanner input = new Scanner (System.in);
+	
+	System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.");
+	option = input.nextInt();
 			
-		if (option != 4) {
+		while (option != 4) {
 		switch(option) {
 		  case 1:
 			  System.out.println("\n1. To access your existing account\n2. To create a new account");
-			  switch (option) {
+			  switch (input.nextInt()) {
 			  
 			  case 1:
 				  
@@ -44,7 +57,6 @@ public class Bank {
 				  BankTeller newAcc = new BankTeller();
 				  newAcc.toDoPrompt();
 				  break;
-			  
 			  }
 			  
 		    break;
