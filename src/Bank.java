@@ -18,7 +18,7 @@ public class Bank {
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
-		System.out.println("Are you an existing user?");
+		System.out.print("Are you an existing user? ");
 		userStatus = input.nextLine();
 		if (userStatus.equals("Yes."))
 		userInput();
