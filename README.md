@@ -33,10 +33,15 @@ Things to add:
 ***Update October 21, 2019***
 - transaction history is now properly written to file
 - user can now ask for Bank Balance Enquiry
+- BankTeller is functional
+- Can create and alter accounts
+- Reads the text file into variables.
 
-***Needs Work (ATM)***
-- ability to cancel withdraw
+***Update October 22, 2019***
+- user can now exchange currency
 
-***Question***
-- alright, so I added a file called "BankQuestion" and basically that's the main in my code
-- should I use the main class "Bank" that the github has, or can we replace that file with mine? 
+***Needs Work (ATM & BankTeller)***
+- ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
+- BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
+- Need to include the balance in text files and BankTeller Methods
+- ability to view stats
