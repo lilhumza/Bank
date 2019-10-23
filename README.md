@@ -45,3 +45,5 @@ Things to add:
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
 - Need to include the balance in text files and BankTeller Methods
 - ability to view stats
+
+***Forgot one thing in the main, I'll reupload it in a sec.***
