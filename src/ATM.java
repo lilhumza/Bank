@@ -30,7 +30,7 @@ public class ATM {
 	}
 
 	public String transactionHistory(int accountNumber, boolean t) throws IOException{
-		String fileName = Integer.toString(accountNumber);
+		String fileName = Integer.toString(accountNumber) + ".txt";
 		String line = Files.readAllLines(Paths.get(fileName)).get(5);
 		if (t){
 			System.out.println("\nTransaction History\n" + line + "\n");
@@ -75,7 +75,7 @@ public class ATM {
 	}
 
 	public ArrayList<String> readAccountInfo(int name) {
-		String fileName = Integer.toString(name);
+		String fileName = Integer.toString(name) + ".txt";
 		ArrayList<String> accountValues = new ArrayList<String>();
 		String value;
 		try {
@@ -117,7 +117,7 @@ public class ATM {
 	}
 	public void updateTransactionHistory(int accountNumber, String data) throws IOException {
 		String tH = transactionHistory(accountNumber, false);
-		String fileName = Integer.toString(accountNumber);
+		String fileName = Integer.toString(accountNumber) + ".txt";
 		RandomAccessFile f = new RandomAccessFile(fileName, "rw");
 		long length = f.length() - 1;
 		byte b;
@@ -139,7 +139,7 @@ public class ATM {
 	}
 	
 	public void currentBankBalance(int accountNumber) throws IOException{
-		String fileName = Integer.toString(accountNumber);
+		String fileName = Integer.toString(accountNumber) + ".txt";
 		String line = Files.readAllLines(Paths.get(fileName)).get(4);
 		System.out.println("Your current balance is: " + line);
 	}
