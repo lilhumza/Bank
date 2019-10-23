@@ -48,6 +48,7 @@ public class BankTeller {
 		String textFile = Integer.toString(accNum)+".txt";
 		
 		 try {
+			 
 		      FileReader in = new FileReader(textFile);
 		      BufferedReader readFile = new BufferedReader(in);
 
@@ -55,7 +56,7 @@ public class BankTeller {
 		      this.lName = readFile.readLine(); //Reads second line and adds to lName
 		      this.accNum = Integer.parseInt(readFile.readLine()); //Reads third line and adds to accNum
 		      this.accPin = Integer.parseInt(readFile.readLine()); //Reads fourth line and adds to accPin
-		      
+		      this.balance = Double.parseDouble(readFile.readLine());//Reads fifth line and adds to balance
 		      String[] splitStr = readFile.readLine().split(" ");
 		      
 		      for (int i = 0; i < splitStr.length; i++){
@@ -68,9 +69,38 @@ public class BankTeller {
 		}
 		
 	}
+	public void justWrite() {
+		
+		String textFile = Integer.toString(accNum)+".txt";
+		
+		try {
+			
+			FileWriter out = new FileWriter(textFile);
+			BufferedWriter writeFile = new BufferedWriter(out);
+			
+			writeFile.write(fName);
+			writeFile.newLine();
+			writeFile.write(lName);
+			writeFile.newLine();
+			writeFile.write(String.valueOf(accNum));
+			writeFile.newLine();
+			writeFile.write(String.valueOf(accPin));
+			writeFile.newLine();
+			writeFile.write(String.valueOf(balance));
+			
+			
+			writeFile.close();
+			out.close();
+			
+			System.out.println("Account Updated");
+		} catch (IOException e) {
+				System.err.println("IOException: " + e.getMessage());
+		}
+		
+	}
 	public void toDoPrompt() throws IOException {
 		
-		System.out.println("What would you like to do?\n1. Deposit\n2. Withdraw\n3. Change Transaction History\n4. Close Account\n5. Finished");
+		System.out.println("What would you like to do?\n1. Deposit\n2. Withdraw\n3. Change Transaction History\n4. Close Account\n5. Finished\nType any other number to cancel");
 		switch (input.nextInt()) {
 		case 1:
 			System.out.println("Enter deposit amount:");
@@ -88,7 +118,8 @@ public class BankTeller {
 			writeInfo();
 			break;
 		default:
-		System.out.println("Done Messed Up Young Blood");
+		System.out.println("User Cancelled, Have A Good Day :)");
+		
 		}
 	}
 
@@ -99,10 +130,18 @@ public class BankTeller {
 		if (transactionHistory.size() == 0) {
 			System.out.println("You Have No Transactions!");
 		} else {
-			
 			System.out.println("Remove Transaction at index:");
 			int index = input.nextInt();
+			
 			System.out.println("Removing Transaction: "+transactionHistory.get(index));
+			if (transactionHistory.get(index).substring(0,1).equals("+")) {
+				//Add to Balance Remove from history
+				balance -= Double.parseDouble(transactionHistory.get(index).substring(1,transactionHistory.size()));
+			} else if (transactionHistory.get(index).substring(0,1).equals("-")) {
+				//Subtract to balance from history
+				balance += Double.parseDouble(transactionHistory.get(index).substring(1,transactionHistory.size()));
+			}
+			
 			transactionHistory.remove(index);
 			System.out.println("Updated Transaction History: \n"+transactionHistory);
 			writeInfo();
@@ -142,6 +181,8 @@ public class BankTeller {
 			writeFile.write(String.valueOf(accNum));
 			writeFile.newLine();
 			writeFile.write(String.valueOf(accPin));
+			writeFile.newLine();
+			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
 			
 			if (transactionHistory.size() > 0) {
