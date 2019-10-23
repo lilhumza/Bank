@@ -8,7 +8,7 @@ public class Bank {
 		// variables
 		
 		String firstName, lastName;
-		int option, accountNumber;
+		int option, accountPin, accountNumber;
 		Scanner input = new Scanner (System.in);
 		
 		java.util.Date date = new java.util.Date();
@@ -18,23 +18,17 @@ public class Bank {
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
-		System.out.println("");
-		System.out.println("What is your first name?");
+		BankTeller account = new BankTeller ();
 		
-		firstName = input.nextLine();
-		
-		System.out.println("What is your last name?");	
-		lastName = input.nextLine();
 		System.out.println("Your account information has been generated.");
 
-		Account account = new Account (firstName, lastName);
 		System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.");
 		option = input.nextInt();
 			
 		if (option != 4) {
 		switch(option) {
 		  case 1:
-			  System.out.println("Welcome to the Bank Teller!\n1. To access your existing account\n2. To create a new account");
+			  System.out.println("\n1. To access your existing account\n2. To create a new account");
 			  switch (option) {
 			  
 			  case 1:
@@ -56,26 +50,30 @@ public class Bank {
 		    break;
 		 
 		  case 2:
-			  
-				ATM account = new ATM(accountNumber,accountPin);
+			    
+			  	System.out.println("Enter your account number.");
+			  	accountNumber = input.nextInt();
+			  	System.out.println("Enter your account PIN.");
+			  	accountPin = input.nextInt();
+				ATM accountAT = new ATM (accountNumber,accountPin);
 				System.out.println("Welcome to the ATM. What would you like to do? ");
-				boolean approved = account.approveCredentials(accountNumber,accountPin);
-				boolean exit = account.exit;
+				boolean approved = accountAT.approveCredentials(accountNumber,accountPin);
+				boolean exit = accountAT.exit;
 				if (approved) {
 					while(!exit) {
 						System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
 						int choice = input.nextInt();
 						switch (choice) {
 							case 1:
-								account.withdrawMoney(accountNumber);
+								accountAT.withdrawMoney(accountNumber);
 								break;
 							case 2:
-								account.depositMoney(accountNumber);
+								accountAT.depositMoney(accountNumber);
 								break;
 							case 3:
 								break;
 							case 4:
-								account.currentBankBalance(accountNumber);
+								accountAT.currentBankBalance(accountNumber);
 								break;
 							case 5:
 								System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
@@ -83,12 +81,12 @@ public class Bank {
 								if (choice == 1){
 									System.out.println("Please enter your USD");
 									double money = input.nextDouble();
-									account.exchangeCurrency(1, money);
+									accountAT.exchangeCurrency(1, money);
 								}
 								else{
 									System.out.println("Please enter your CAD");
 									double money = input.nextDouble();
-									account.exchangeCurrency(2, money);
+									accountAT.exchangeCurrency(2, money);
 								}
 								break;
 							case 6:
@@ -100,8 +98,9 @@ public class Bank {
 				}
 				
 				case 3: 
-					
-					account.readFile(account.accountNum);	
+										
+					Account accountAC = new Account ();
+					accountAC.readFile(accountAC.accountNum);	
 					
 					/*System.out.println("Your first name is " + account.firstName);
 					System.out.println("Your last name is " + account.lastName);
@@ -115,7 +114,7 @@ public class Bank {
 					System.out.println("Thank you for banking at TD.");
 					break;
 		}
-	}
+	}		
 		input.close();
 	}
 }
