@@ -7,8 +7,8 @@ public class Bank {
 		
 		// variables
 		
-		String firstName, lastName, userStatus;
-		int option, accountPin, accountNumber;
+		String firstName, lastName;
+		int option, accountPin, accountNumber, userStatus;
 		Scanner input = new Scanner (System.in);
 		
 		java.util.Date date = new java.util.Date();
@@ -18,11 +18,11 @@ public class Bank {
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
-		System.out.print("Are you an existing user? ");
-		userStatus = input.nextLine();
-		if (userStatus.equals("Yes."))
+		System.out.print("Are you an existing user? If you are, enter 1. If not, enter 2.");
+		userStatus = input.nextInt();
+		if (userStatus == 1)
 		userInput();
-		else if (userStatus.equals("No.")) {
+		else if (userStatus == 2) {
 			BankTeller account = new BankTeller ();
 			account.justWrite();
 			userInput();
