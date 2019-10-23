@@ -9,11 +9,6 @@ public class Account {
 	
 	FileReader read;
 	BufferedReader buffRead;
-
-	public Account(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 	
 	public void readFile (int accountNum)
 	{
