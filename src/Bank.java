@@ -7,13 +7,13 @@ public class Bank {
 		
 		// variables
 		
-		String firstName, lastName;
-		int option, accountPin, accountNumber, userStatus;
+		int userStatus;
 		Scanner input = new Scanner (System.in);
 		
-		java.util.Date date = new java.util.Date();
+		java.util.Date date = new java.util.Date(); // date
 		
-		//  user interaction
+		//  this allows the user to access the bank based
+		//  on whether or not they are an existing user
 		
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
@@ -21,31 +21,34 @@ public class Bank {
 		System.out.print("Are you an existing user? If you are, enter 1. If not, enter 2.");
 		userStatus = input.nextInt();
 		if (userStatus == 1)
-		userInput();
+		userInput(input);
 		else if (userStatus == 2) {
 			BankTeller account = new BankTeller ();
 			account.justWrite();
-			userInput();
+			userInput(input);
 		}
+		
+		input.close();
 	}
 	
-	public static void userInput () throws IOException {
+	// method that allows the user to access the bank
+	
+	public static void userInput (Scanner input) throws IOException {
 	
 	String firstName, lastName;
 	int option, accountPin, accountNumber;
-	Scanner input = new Scanner (System.in);
 	
-	System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.");
+	do {
+	
+	System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.\n4. Exit.");
 	option = input.nextInt();
-			
-		while (option != 4) {
 		switch(option) {
-		  case 1:
+		
+		  case 1: // bank teller
 			  System.out.println("\n1. To access your existing account\n2. To create a new account");
 			  switch (input.nextInt()) {
 			  
 			  case 1:
-				  
 				  System.out.print("Enter your account number: ");
 				  int accNum = input.nextInt();
 				  BankTeller existAcc = new BankTeller(accNum);
@@ -58,10 +61,9 @@ public class Bank {
 				  newAcc.toDoPrompt();
 				  break;
 			  }
-			  
 		    break;
 		 
-		  case 2:
+		  case 2: // ATM    
 			    
 			  	System.out.println("Enter your account number.");
 			  	accountNumber = input.nextInt();
@@ -104,29 +106,21 @@ public class Bank {
 							case 6:
 								exit = true;
 							default:	
-							
 						}
 					}
 				}
 				
-				case 3: 
-										
-					Account accountAC = new Account ();
-					accountAC.readFile(accountAC.accountNum);	
+				case 3: // account information
 					
-					/*System.out.println("Your first name is " + account.firstName);
-					System.out.println("Your last name is " + account.lastName);
-					System.out.println("Your account card number is " + account.accountNum);
-					System.out.println("Your specialized PIN is " + account.pin);
-					System.out.println("Your account balance is " + account.balance);*/
-				    break;
+					Account accountAC = new Account ();
+					accountAC.readFile();	
+		  	    	break;
 		  	    	
-				case 4:
-						
+				case 4:	 // exit	
+		
 					System.out.println("Thank you for banking at TD.");
 					break;
-		}
-	}		
-		input.close();
+			}	
+		} while (option != 4);
 	}
 }
