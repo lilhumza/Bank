@@ -110,7 +110,7 @@ public class ATM {
 	}
 
 	public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
-		Path path = Paths.get(Integer.toString(accountNumber));
+		Path path = Paths.get(Integer.toString(accountNumber) + ".txt");
 		List<String> lines = Files.readAllLines(path);
 		lines.set(lineNumber - 1, data);
 		Files.write(path, lines);
