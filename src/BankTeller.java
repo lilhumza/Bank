@@ -88,6 +88,7 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write(String.valueOf(balance));
 			
+			
 			writeFile.close();
 			out.close();
 			
@@ -102,10 +103,10 @@ public class BankTeller {
 		System.out.println("What would you like to do?\n1. Deposit\n2. Withdraw\n3. Change Transaction History\n4. Close Account\n5. Finished\nType any other number to cancel");
 		switch (input.nextInt()) {
 		case 1:
-			System.out.println("Enter deposit amount:");
+			withDraw();
 			break;
 		case 2:
-			System.out.println("Enter witdrawal amount: ");
+			deposit();
 			break;
 		case 3:
 			changeTransactionHistory();
@@ -121,7 +122,27 @@ public class BankTeller {
 		
 		}
 	}
-
+	public void deposit() {
+		System.out.println("Enter deposit amount: ");
+		double amount = input.nextDouble();
+		balance += amount;
+		transactionHistory.add("+"+amount);
+		System.out.println("Current Balance: "+balance);
+	
+	}
+	
+	public void withDraw() {
+		
+		if (balance == 0.00){
+			System.out.println("No Money in Account! Deposit First!");
+		} else {
+			System.out.println("Enter withdrawal amount: ");
+			double amount = input.nextDouble();
+			balance -= amount;
+			transactionHistory.add("-"+amount);
+			System.out.println("Current Balance: "+balance);
+		}
+	}
 	public void changeTransactionHistory() {
 		
 		System.out.println("Current History: \n"+transactionHistory);
