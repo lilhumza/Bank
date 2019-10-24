@@ -1,8 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-
-public class Account {
+	public class Account {
 
 	Scanner input = new Scanner (System.in);
 	String firstName, lastName, enterAccNumS, splitFile;
@@ -12,26 +11,25 @@ public class Account {
 	FileReader read;
 	BufferedReader buffRead;
 	
-	public void readFile (int accountNum)
+	public void readFile ()
 	{
-		
 		System.out.println("To access your account information, please enter your account number.");
 		enterAccNumS = input.nextLine();
-		enterAccNum = Integer.parseInt(enterAccNumS);
-		File f = new File(enterAccNumS + ".txt");
+		accountNum = Integer.parseInt(enterAccNumS);
+		File f = new File(accountNum + ".txt");
 		
-		do {
-			
-			if ((count > 1) && f.exists() == false)
-			{
+		while((f.exists() && !f.isDirectory()) == false) {
+	
 				System.out.println("There is no account information associated with the provided number, please try again.");
 				System.out.println("Enter your account number.");
 				enterAccNumS = input.nextLine();
-				enterAccNum = Integer.parseInt(enterAccNumS);
-				f = new File(enterAccNumS + ".txt");
-
+				accountNum = Integer.parseInt(enterAccNumS);
+				f = new File(accountNum + ".txt");
+				break;
 			}
-
+		
+		if ((f.exists() && !f.isDirectory()) == true)
+		{
 				try {
 					read = new FileReader(f);
 					buffRead = new BufferedReader(read);
@@ -42,10 +40,7 @@ public class Account {
 					}
 				} catch (FileNotFoundException e1) {
 				} catch (IOException e) {
-				}
-
-				count++;
-				
-		} while((f.exists() && !f.isDirectory()) == false);
-	}			
-}
+			}				
+		}
+	}
+}			
