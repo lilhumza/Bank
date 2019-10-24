@@ -4,17 +4,7 @@
 File Assignments:
 - Abdul: ATM.java
 - Humza: BankTeller.java
-- Tarek: Account.java
-
-Things to add:
-- Make accounts that are limited and do not have as much capabilites as main accounts (i.e. student/children accounts).
-- Include security questions incase the user has forgot their password.
- - For the security questions, make an arraylist that the questions are added to, and make it keep reminding them.
-- Transfer balances from one account to another account.
-- Include a bankruptcy option, that happens when all accounts have no money inside of them.
-- Loans + Savings/Checking Accounts are possibilites. 
-- Make account number longer.
-- 
+- Fares: Account.java
 
 ***Update October 17, 2019***
 - You can now withdraw/deposit money from your account
@@ -48,3 +38,15 @@ Things to add:
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
 - Need to include the balance in text files and BankTeller Methods
 - ability to view stats
+
+***Tasks***
+- Security Questions
+ - For the security questions, make an arraylist that the questions are added to, and make it keep reminding them.
+- Making sure that it does not generate the same random number for the account file.
+- Let user choose their own PIN.
+- Change account number to 6 digits.
+- Transfer balances from one account to another account.
+- Make accounts that are limited and do not have as much capabilites as main accounts (i.e. student/children accounts). (Maybe)
+
+
+
