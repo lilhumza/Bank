@@ -133,8 +133,9 @@ public class BankTeller {
 	
 	public void withDraw() {
 		
-		if (balance == 0.00){
+		if (balance <= 0.00){
 			System.out.println("No Money in Account! Deposit First!");
+			balance = 0.00;
 		} else {
 			System.out.println("Enter withdrawal amount: ");
 			double amount = input.nextDouble();
