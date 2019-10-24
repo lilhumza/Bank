@@ -88,7 +88,6 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write(String.valueOf(balance));
 			
-			
 			writeFile.close();
 			out.close();
 			
