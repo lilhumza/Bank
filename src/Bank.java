@@ -18,7 +18,7 @@ public class Bank {
 		System.out.println("TD Banking  - " + date);
 		System.out.println("Hello, thank you for choosing to bank with TD.");
 		
-		System.out.print("Are you an existing user? If you are, enter 1. If not, enter 2.");
+		System.out.print("Are you an existing user? If you are, enter 1. If not, enter 2. ");
 		userStatus = input.nextInt();
 		if (userStatus == 1)
 		userInput(input);
@@ -51,7 +51,9 @@ public class Bank {
 			  case 1:
 				  System.out.print("Enter your account number: ");
 				  int accNum = input.nextInt();
-				  BankTeller existAcc = new BankTeller(accNum);
+				  System.out.print("Enter your PIN ");
+				  int pin = input.nextInt();
+				  BankTeller existAcc = new BankTeller(accNum, pin);
 				  existAcc.toDoPrompt();
 				  break;
 				  
