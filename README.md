@@ -33,7 +33,7 @@ File Assignments:
 ***Update October 23, 2019***
 - ATM now only supports .txt files
 
-***Update October 23, 2019***
+***Update October 24, 2019***
 - Fixed a bug in ATM
 
 ***Needs Work (ATM & BankTeller)***
