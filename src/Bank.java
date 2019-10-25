@@ -87,6 +87,7 @@ public class Bank {
 								accountAT.depositMoney(accountNumber);
 								break;
 							case 3:
+								accountAT.transactionHistory(accountNumber, true);
 								break;
 							case 4:
 								accountAT.currentBankBalance(accountNumber);
