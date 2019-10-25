@@ -53,7 +53,7 @@ public class Bank {
 				  int accNum = input.nextInt();
 				  System.out.print("Enter your PIN ");
 				  int pin = input.nextInt();
-				  BankTeller existAcc = new BankTeller(accNum, pin);
+				  BankTeller existAcc = new BankTeller(accNum);
 				  existAcc.toDoPrompt();
 				  break;
 				  
