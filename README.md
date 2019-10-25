@@ -1,11 +1,5 @@
 # Bank
 
-
-File Assignments:
-- Abdul: ATM.java
-- Humza: BankTeller.java
-- Fares: Account.java
-
 ***Update October 17, 2019***
 - You can now withdraw/deposit money from your account
 - User files will now be updated with new balance
