@@ -1,9 +1,11 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 public class Bank {
 
-	public static void main(String[] args) throws IOException {
+
+	public static void main(String[] args) throws Exception {
 
 		// variables
 
@@ -33,13 +35,13 @@ public class Bank {
 
 	// method that allows the user to access the bank
 
-	public static void userInput (Scanner input) throws IOException {
+	public static void userInput (Scanner input) throws Exception {
+		FileEncryption fe = new FileEncryption();
 
 		String firstName, lastName;
-		int option, accountPin, accountNumber;
+		int option, accountPin, accountNumber = 0;
 
 		do {
-
 			System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.\n4. Exit.");
 			option = input.nextInt();
 			switch(option) {
@@ -50,15 +52,27 @@ public class Bank {
 
 						case 1:
 							System.out.print("Enter your account number: ");
-							int accNum = input.nextInt();
+							accountNumber = input.nextInt();
 							System.out.print("Enter your PIN ");
 							int pin = input.nextInt();
-							BankTeller existAcc = new BankTeller(accNum);
+
+							try {
+								File f = new File(accountNumber + ".txt");
+								fe.decrypt(f, f);
+							}catch (Exception e){
+							}
+
+							BankTeller existAcc = new BankTeller(accountNumber);
 							existAcc.toDoPrompt();
+
 							break;
 
 						case 2:
-
+							try {
+								File f = new File(accountNumber + ".txt");
+								fe.decrypt(f, f);
+							}catch (Exception e){
+							}
 							BankTeller newAcc = new BankTeller();
 							newAcc.toDoPrompt();
 							break;
@@ -71,8 +85,16 @@ public class Bank {
 					accountNumber = input.nextInt();
 					System.out.println("Enter your account PIN.");
 					accountPin = input.nextInt();
+					try {
+						File f = new File(accountNumber + ".txt");
+						fe.decrypt(f, f);
+					}catch (Exception e){
+
+					}
+
 					ATM accountAT = new ATM (accountNumber,accountPin);
 					System.out.println("Welcome to the ATM. What would you like to do? ");
+
 					boolean approved = accountAT.approveCredentials(accountNumber,accountPin);
 					boolean exit = accountAT.exit;
 					if (approved) {
@@ -81,16 +103,24 @@ public class Bank {
 							int choice = input.nextInt();
 							switch (choice) {
 								case 1:
+
 									accountAT.withdrawMoney(accountNumber);
+
 									break;
 								case 2:
+
 									accountAT.depositMoney(accountNumber);
+
 									break;
 								case 3:
+
 									accountAT.transactionHistory(accountNumber, true);
+
 									break;
 								case 4:
+
 									accountAT.currentBankBalance(accountNumber);
+
 									break;
 								case 5:
 									System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
@@ -108,22 +138,33 @@ public class Bank {
 									break;
 								case 6:
 									exit = true;
+
 								default:
 							}
 						}
 					}
 
 				case 3: // account information
+					try {
+						File f = new File(accountNumber + ".txt");
+						fe.decrypt(f, f);
+					}catch (Exception e){
+					}
 
 					Account accountAC = new Account ();
 					accountAC.readFile();
 					break;
 
 				case 4:	 // exit
-
 					System.out.println("Thank you for banking at TD.");
 					break;
 			}
 		} while (option != 4);
+
+		try {
+			File f = new File(accountNumber + ".txt");
+			fe.encrypt(f, f);
+		}catch (Exception e){
+		}
 	}
 }
