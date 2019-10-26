@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 
 public class Account {
-
 	Scanner input = new Scanner (System.in);
 	String firstName, lastName, enterAccNumS, splitFile;
 	int pin, accountNum, enterAccNum, count;
@@ -11,13 +10,12 @@ public class Account {
 	FileReader read;
 	BufferedReader buffRead;
 
-	public void readFile ()
+	public void readFile () throws Exception
 	{
 		System.out.println("To access your account information, please enter your account number.");
 		enterAccNumS = input.nextLine();
 		accountNum = Integer.parseInt(enterAccNumS);
-		File f = new File(accountNum + ".txt");
-
+		File f = new File(enterAccNumS + ".txt");
 		while((f.exists() && !f.isDirectory()) == false) {
 
 			System.out.println("There is no account information associated with the provided number, please try again.");
