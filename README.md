@@ -8,7 +8,8 @@
 - created AES system to decrpt/encrpt files
 - uses 32 bits
 - any higher bits takes too long to process
-- will implement into bank on Monday
+- has been implemented into bank 
+- ***IMPORTANT*** You must exit thru the program, dont manually exit, pls
 
 # Bank
 
