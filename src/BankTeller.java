@@ -149,21 +149,16 @@ public class BankTeller {
 				System.out.println("Removing Transaction: "+transactionHistory.get(index));
 				if (transactionHistory.get(index).substring(0,1).equals("+")) {
 					//Add to Balance Remove from history
-					if(transactionHistory.size() == 1){
-						System.out.println(transactionHistory.get(index).substring(1,transactionHistory.size() + 2));
-					}
-					else {
-						balance -= Double.parseDouble(transactionHistory.get(index).substring(1, transactionHistory.size()));
-					}
+					System.out.println(transactionHistory.size());
+
+						balance -= Double.parseDouble(transactionHistory.get(index).substring(1));
+
 				} else if (transactionHistory.get(index).substring(0,1).equals("-")) {
 					//Subtract to balance from history
+					System.out.println(transactionHistory.size());
 
-					if(transactionHistory.size() == 1){
-						System.out.println(transactionHistory.get(index).substring(1,transactionHistory.size() + 2));
-					}
-					else {
-						balance += Double.parseDouble(transactionHistory.get(index).substring(1, transactionHistory.size()));
-					}
+						balance += Double.parseDouble(transactionHistory.get(index).substring(1));
+
 				}
 
 				transactionHistory.remove(index);
