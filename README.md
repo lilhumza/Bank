@@ -8,6 +8,7 @@
 - created AES system to decrpt/encrpt files
 - uses 32 bits
 - any higher bits takes too long to process
+- still have to implement into bank
 
 # Bank
 
