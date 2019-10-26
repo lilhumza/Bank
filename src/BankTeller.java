@@ -65,7 +65,7 @@ public class BankTeller {
 		}
 
 	}
-	public void justWrite() {
+	public void justWrite() throws Exception{
 
 		String textFile = Integer.toString(accNum)+".txt";
 
@@ -84,8 +84,7 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
-			writeFile.write("0 ");
-
+			writeFile.write("0");
 
 			writeFile.close();
 			out.close();
@@ -96,12 +95,13 @@ public class BankTeller {
 		}
 
 	}
-	public void toDoPrompt() throws IOException {
+	public void toDoPrompt() throws Exception {
 
 		System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to cancel");
 		switch (input.nextInt()) {
 			case 1:
 				changeTransactionHistory();
+
 				break;
 			case 2:
 				closeAccount();
@@ -151,13 +151,13 @@ public class BankTeller {
 					//Add to Balance Remove from history
 					System.out.println(transactionHistory.size());
 
-						balance -= Double.parseDouble(transactionHistory.get(index).substring(1));
+					balance -= Double.parseDouble(transactionHistory.get(index).substring(1));
 
 				} else if (transactionHistory.get(index).substring(0,1).equals("-")) {
 					//Subtract to balance from history
 					System.out.println(transactionHistory.size());
 
-						balance += Double.parseDouble(transactionHistory.get(index).substring(1));
+					balance += Double.parseDouble(transactionHistory.get(index).substring(1));
 
 				}
 
@@ -206,7 +206,7 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
-			writeFile.write("0 ");
+			writeFile.write("0");
 			if (transactionHistory.size() > 0) {
 				for (int i = 0; i < transactionHistory.size(); i++) {
 					writeFile.write(transactionHistory.get(i)+" ");
