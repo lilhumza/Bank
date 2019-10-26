@@ -1,129 +1,147 @@
-import java.io.IOException;
+import java.io.*;
+import java.math.*;
 import java.util.*;
+import java.nio.file.*;
+public class ATM {
 
-public class Bank {
+	String storedAccountNumber;
+	String storedPinNumber;
+	boolean approved = false;
+	boolean exit = false;
+	Scanner input = new Scanner(System.in);
 
-	public static void main(String[] args) throws IOException {
-		
-		// variables
-		
-		int userStatus;
-		Scanner input = new Scanner (System.in);
-		
-		java.util.Date date = new java.util.Date(); // date
-		
-		//  this allows the user to access the bank based
-		//  on whether or not they are an existing user
-		
-		System.out.println("TD Banking  - " + date);
-		System.out.println("Hello, thank you for choosing to bank with TD.");
-		
-		System.out.print("Are you an existing user? If you are, enter 1. If not, enter 2. ");
-		userStatus = input.nextInt();
-		if (userStatus == 1)
-		userInput(input);
-		else if (userStatus == 2) {
-			BankTeller account = new BankTeller ();
-			account.justWrite();
-			userInput(input);
+	public ATM (int accountNumber, int pinNumber) throws IOException{
+		super();
+		this.exit = exit;
+		approveCredentials(accountNumber, pinNumber);
+
+	}
+
+	public boolean approveCredentials(int accountNumber, int pinNumber){
+		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
+		storedAccountNumber = accountInfo.get(2);
+		storedPinNumber = accountInfo.get(3);
+		if (accountNumber == Integer.parseInt(storedAccountNumber)){
+			if (pinNumber == Integer.parseInt(storedPinNumber)){
+				return approved = true;
+			}
 		}
-		
-		input.close();
+		return approved = false;
 	}
-	
-	// method that allows the user to access the bank
-	
-	public static void userInput (Scanner input) throws IOException {
-	
-	String firstName, lastName;
-	int option, accountPin, accountNumber;
-	
-	do {
-	
-	System.out.println("\n1. Continue talking to a bankteller.\n2. Talk to the ATM.\n3. Check your account information.\n4. Exit.");
-	option = input.nextInt();
-		switch(option) {
-		
-		  case 1: // bank teller
-			  System.out.println("\n1. To access your existing account\n2. To create a new account");
-			  switch (input.nextInt()) {
-			  
-			  case 1:
-				  System.out.print("Enter your account number: ");
-				  int accNum = input.nextInt();
-				  System.out.print("Enter your PIN ");
-				  int pin = input.nextInt();
-				  BankTeller existAcc = new BankTeller(accNum);
-				  existAcc.toDoPrompt();
-				  break;
-				  
-			  case 2:
-				  
-				  BankTeller newAcc = new BankTeller();
-				  newAcc.toDoPrompt();
-				  break;
-			  }
-		    break;
-		 
-		  case 2: // ATM    
-			    
-			  	System.out.println("Enter your account number.");
-			  	accountNumber = input.nextInt();
-			  	System.out.println("Enter your account PIN.");
-			  	accountPin = input.nextInt();
-				ATM accountAT = new ATM (accountNumber,accountPin);
-				System.out.println("Welcome to the ATM. What would you like to do? ");
-				boolean approved = accountAT.approveCredentials(accountNumber,accountPin);
-				boolean exit = accountAT.exit;
-				if (approved) {
-					while(!exit) {
-						System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
-						int choice = input.nextInt();
-						switch (choice) {
-							case 1:
-								accountAT.withdrawMoney(accountNumber);
-								break;
-							case 2:
-								accountAT.depositMoney(accountNumber);
-								break;
-							case 3:
-								accountAT.transactionHistory(accountNumber, true);
-								break;
-							case 4:
-								accountAT.currentBankBalance(accountNumber);
-								break;
-							case 5:
-								System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
-								choice = input.nextInt();
-								if (choice == 1){
-									System.out.println("Please enter your USD");
-									double money = input.nextDouble();
-									accountAT.exchangeCurrency(1, money);
-								}
-								else{
-									System.out.println("Please enter your CAD");
-									double money = input.nextDouble();
-									accountAT.exchangeCurrency(2, money);
-								}
-								break;
-							case 6:
-								exit = true;
-							default:	
-						}
-					}
-				}
-				
-				case 3: // account information
-					
-					Account accountAC = new Account ();
-					accountAC.readFile();	
-		  	    	break;
-		  	    	
-				case 4:	 // exit	
-		
-					System.out.println("Thank you for banking at TD.");
-					break;
-			}	
-		} while (option != 4);
+
+	public String transactionHistory(int accountNumber, boolean t) throws IOException{
+		String fileName = Integer.toString(accountNumber) + ".txt";
+		String line = Files.readAllLines(Paths.get(fileName)).get(5);
+		if (t){
+			System.out.println("\nTransaction History\n" + line + "\n");
+		}
+		return line;
 	}
+
+	public static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+
+		BigDecimal bd = BigDecimal.valueOf(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
+	}
+
+	public void withdrawMoney(int accountNumber) throws IOException{
+		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
+		double balance =  Double.parseDouble(accountInfo.get(4));
+		balance = round(balance, 2);
+		System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
+		double withdrawAmount = input.nextDouble();
+		double newBalance = balance - withdrawAmount;
+		newBalance = round(newBalance,2);
+		updateBalance(accountNumber,5, Double.toString(newBalance));
+		System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance +"\n");
+		String history = "-" + Double.toString(withdrawAmount);
+		updateTransactionHistory(accountNumber, history);
+	}
+
+	public void depositMoney(int accountNumber) throws IOException{
+		ArrayList<String> accountInfo = readAccountInfo(accountNumber);
+		double balance =  Double.parseDouble(accountInfo.get(4));
+		balance = round(balance, 2);
+		System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
+		double depositAmount = input.nextDouble();
+		double newBalance = balance + depositAmount;
+		newBalance = round(newBalance,2);
+		updateBalance(accountNumber,5, Double.toString(newBalance));
+		System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance + "\n");
+		String history = "+" + Double.toString(depositAmount);
+		updateTransactionHistory(accountNumber, history);
+	}
+
+	public ArrayList<String> readAccountInfo(int name) {
+		String fileName = Integer.toString(name) + ".txt";
+		ArrayList<String> accountValues = new ArrayList<String>();
+		String value;
+		try {
+			FileReader in = new FileReader(fileName);
+			BufferedReader readFile = new BufferedReader(in);
+			while ((value = readFile.readLine()) != null) {
+				accountValues.add(value);
+			}
+			readFile.close();
+			in.close();
+		} catch (Exception e) {
+			System.out.println("Account does not exist");
+			System.err.println("IOException: " + e.getMessage());
+		}
+		return accountValues;
+	}
+
+	public double exchangeCurrency(int type, double amount){
+
+		if (type == 1){
+			amount /= 0.76;
+			round(amount, 2);
+			System.out.println("Converted to " + amount + " CAD");
+		}
+		//cad to usd
+		else{
+			amount *= 0.76;
+			round(amount, 2);
+			System.out.println("Converted to " + amount + " USD");
+		}
+		return amount;
+	}
+
+	public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
+		Path path = Paths.get(Integer.toString(accountNumber) + ".txt");
+		List<String> lines = Files.readAllLines(path);
+		lines.set(lineNumber - 1, data);
+		Files.write(path, lines);
+	}
+	public void updateTransactionHistory(int accountNumber, String data) throws IOException {
+		String tH = transactionHistory(accountNumber, false);
+		String fileName = Integer.toString(accountNumber) + ".txt";
+		RandomAccessFile f = new RandomAccessFile(fileName, "rw");
+		long length = f.length() - 1;
+		byte b;
+		do {
+			length -= 1;
+			f.seek(length);
+			b = f.readByte();
+		} while(b != 10);
+		f.setLength(length+1);
+		f.close();
+
+		tH += (" " + data);
+		FileWriter in = new FileWriter(fileName, true);
+		BufferedWriter bw = new BufferedWriter(in);
+		bw.write(tH);
+		bw.close();
+		in.close();
+
+	}
+
+	public void currentBankBalance(int accountNumber) throws IOException{
+		String fileName = Integer.toString(accountNumber) + ".txt";
+		String line = Files.readAllLines(Paths.get(fileName)).get(4);
+		System.out.println("Your current balance is: " + line);
+	}
+
 }
