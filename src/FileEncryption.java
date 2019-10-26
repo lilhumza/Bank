@@ -8,8 +8,9 @@ import java.security.Key;
 public class FileEncryption {
 
     // Process a file (Encrypts or decrypts depending on cipherMode)
-    private void processFile(boolean encrypt, File inputFile, String inputKey, File outputFile) throws Exception {
+    private void processFile(boolean encrypt, File inputFile, File outputFile) throws Exception {
         // Convert key into bytes
+        String inputKey = "1234567891234567";
         Key key = new SecretKeySpec(inputKey.getBytes(),"AES");
 
         // Get cipher instance
@@ -41,13 +42,13 @@ public class FileEncryption {
     }
 
     // Encrypts a file
-    void encrypt(File inputFile, String inputKey, File outputFile) throws Exception {
-        processFile(true,inputFile,inputKey,outputFile);
+    void encrypt(File inputFile, File outputFile) throws Exception {
+        processFile(true,inputFile,outputFile);
     }
 
     // Decrypts a file
-    void decrypt(File inputFile, String inputKey, File outputFile) throws Exception {
-        processFile(false,inputFile,inputKey,outputFile);
+    void decrypt(File inputFile, File outputFile) throws Exception {
+        processFile(false,inputFile,outputFile);
     }
 
 }
