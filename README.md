@@ -6,7 +6,7 @@
    
 # File Encryption
 - created AES system to decrpt/encrpt files
-- uses 32 bits
+- uses 16 bits
 - any higher bits takes too long to process
 - has been implemented into bank 
 - ***IMPORTANT*** You must exit thru the program, dont manually exit, pls
