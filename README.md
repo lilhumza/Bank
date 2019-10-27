@@ -59,6 +59,3 @@
 - Change account number to 6 digits.
 - Transfer balances from one account to another account.
 - Make accounts that are limited and do not have as much capabilites as main accounts (i.e. student/children accounts). (Maybe)
-
-
-
