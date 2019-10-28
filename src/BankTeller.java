@@ -145,6 +145,7 @@ public class BankTeller {
 				System.out.println("Current History: \n"+transactionHistory);
 				System.out.println("Remove Transaction at index:");
 				int index = input.nextInt();
+				index -=1;
 
 				System.out.println("Removing Transaction: "+transactionHistory.get(index));
 				if (transactionHistory.get(index).substring(0,1).equals("+")) {
