@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
 
-public class MBank {
+public class Bank {
 	public static void main(String[] args) throws Exception {
 		
 		FileEncryption fe = new FileEncryption();
