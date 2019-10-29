@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class MBank {
@@ -39,6 +40,8 @@ public class MBank {
 					
 				}
 				else{
+					
+					
 					t = true;
 					while (exitI == false){
 						System.out.println("Where would you like to go?\n1. Bankteller\n2. Atm\n3. LogOut");
@@ -110,13 +113,17 @@ public class MBank {
 								}
 							case 3:
 								if (exitI2 == true){
+								
+									a = true;
 									break;
 								}
 								System.out.println("You have been logged out\n");
+								
 								accountNumber=0;
 								accountPin=0;
 								exitI = true;
 								exitI2 = true;
+								a = true;
 								break;
 								
 							default:
