@@ -124,6 +124,10 @@ public class MBank {
 					
 				}
 				}
+			case 2:
+				BankTeller account = new BankTeller ();
+				account.justWrite();
+				System.out.println("Returned to main menu");
 			}
 			
 		}
