@@ -39,6 +39,13 @@
 ***Update October 24, 2019***
 - Fixed a bug in ATM
 
+***Update October 26, 2019***
+- file encrytion added to improve security
+
+***Update October 29, 2019***
+- Major changes added to bank.java to improve flow
+- file encrytion temporary removed 
+
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
