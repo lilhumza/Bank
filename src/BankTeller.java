@@ -89,27 +89,32 @@ public class BankTeller {
 			writeFile.close();
 			out.close();
 
-			System.out.println("Account Updated");
+			System.out.println("\n");
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
 		}
 
 	}
-	public void toDoPrompt() throws Exception {
-
-		System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to cancel");
+	public boolean toDoPrompt() throws Exception {
+		boolean e = false, t = false;
+		while(e == false){
+		System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to exit");
 		switch (input.nextInt()) {
 			case 1:
 				changeTransactionHistory();
-
 				break;
 			case 2:
 				closeAccount();
+				t = true;
+				System.out.println("You have left the Bank Teller.\n");
+				e = true;
 				break;
 			default:
-				System.out.println("User Cancelled, Have A Good Day :)");
-
+				System.out.println("You have left the Bank Teller.\n");
+				e = true;
+			}
 		}
+		return t;
 	}
 	public void deposit() {
 		System.out.println("Enter deposit amount: ");
