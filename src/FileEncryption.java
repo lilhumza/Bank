@@ -10,7 +10,7 @@ public class FileEncryption {
     // Process a file (Encrypts or decrypts depending on cipherMode)
     private void processFile(boolean encrypt, File inputFile, File outputFile) throws Exception {
         // Convert key into bytes
-        String inputKey = "1234567891234567";
+        String inputKey = "fUPc9-sJ=b&A$C^zNQqZn4YZ#v*Zp9VG";
         Key key = new SecretKeySpec(inputKey.getBytes(),"AES");
 
         // Get cipher instance
