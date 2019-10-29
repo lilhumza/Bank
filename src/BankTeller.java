@@ -22,7 +22,7 @@ public class BankTeller {
 		this.lName = input.nextLine();
 
 		System.out.println("Your New Banking Information:");
-		this.accNum = (int) (Math.random() * ((9999-1000)+1)+1000);
+		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
 		System.out.println("Account Number: "+ accNum);
 
 		this.accPin = (int) (Math.random() * ((9999-1000)+1)+1000);
