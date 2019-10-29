@@ -44,7 +44,7 @@
 
 ***Update October 29, 2019***
 - Major changes added to bank.java to improve flow
-- file encrytion temporary removed 
+- file encrytion has been implemented with new bank.java
 
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
