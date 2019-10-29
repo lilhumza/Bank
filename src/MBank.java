@@ -6,7 +6,7 @@ public class MBank {
 		FileEncryption fe = new FileEncryption();
 		
 		int choice, accountNumber, accountPin;
-		boolean exitO = false, exitI = false, exitI2 = false, t = false;
+		boolean exitO = false, exitI = false, exitI2 = false, t = false, a = false;
 
 		Scanner input = new Scanner (System.in);
 		java.util.Date date = new java.util.Date(); 
@@ -47,9 +47,14 @@ public class MBank {
 						while (exitI2 == false){
 							switch (choice){
 							case 1:
+								boolean i = false;
 								System.out.println("\nWelcome To the Bank Teller\n"); 
 								BankTeller existAcc = new BankTeller(accountNumber);
-								existAcc.toDoPrompt();
+								i = existAcc.toDoPrompt();
+								if(i == true){
+									exitI = true;
+									a = true;
+								}
 								exitI2 = true;
 								break;
 							case 2:
@@ -125,6 +130,10 @@ public class MBank {
 				}
 				}
 			case 2:
+				if (a == true){
+					a = false;
+					break;
+				}
 				BankTeller account = new BankTeller ();
 				account.justWrite();
 				System.out.println("Returned to main menu");
