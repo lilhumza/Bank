@@ -2,7 +2,6 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-
 public class BankTeller {
 
 	Scanner input = new Scanner (System.in);
@@ -22,6 +21,7 @@ public class BankTeller {
 		this.lName = input.nextLine();
 
 		System.out.println("Your New Banking Information:");
+		
 		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
 		System.out.println("Account Number: "+ accNum);
 
@@ -29,9 +29,6 @@ public class BankTeller {
 		System.out.println("Account Pin: "+ accPin);
 
 		this.balance = 0.00;
-
-
-
 	}
 
 	//Have account and want to change transaction history
