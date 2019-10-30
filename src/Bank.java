@@ -16,8 +16,19 @@ public class Bank {
 
 
 		while (exitO == false){
-			System.out.println("Are you an existing user? If you are, enter 1. If not, enter 2. ");
+			for(int i = 0; i < 3; i++){
+				if(i == 0 || i == 2){
+					System.out.println(" -----------");
+				}
+				else{
+					System.out.println("| Main Menu |");
+				}
+			}
+			System.out.println("(1) SignIn\n(2) SignUp\n(3) Exit");
 			choice = input.nextInt();
+			if(choice == 3){
+				System.exit(1);
+			}
 			t = false;
 			exitI = false;
 
@@ -28,7 +39,7 @@ public class Bank {
 
 						System.out.print("Enter your account number: ");
 						accountNumber = input.nextInt();
-						System.out.print("Enter your PIN ");
+						System.out.print("Enter your PIN: ");
 						accountPin = input.nextInt();
 
 						try{
@@ -41,35 +52,60 @@ public class Bank {
 						t = atm.approveCredentials(accountNumber, accountPin);
 
 						if(t == false){
-							System.out.println("Incorrect account number or account PIN. Try again.");
-
+							System.out.println("Incorrect account number or account PIN.\n(1) Try again.\n(2) Create New Account\n");
+							choice = input.nextInt();
+							if(choice == 2){
+								t = true;
+								exitI = true;
+							}
 						}
 						else{
-
-
 							t = true;
 							while (exitI == false){
+								for(int i = 0; i < 3; i++){
+									if(i == 0 || i == 2){
+										System.out.println(" ------");
+									}
+									else{
+										System.out.println("| BANK |");
+									}
+								}
+								
 								System.out.println("Where would you like to go?\n1. Bankteller\n2. Atm\n3. LogOut");
 								choice = input.nextInt();
 								exitI2 = false;
 								while (exitI2 == false){
 									switch (choice){
 										case 1:
-											boolean i = false;
-											System.out.println("\nWelcome To the Bank Teller\n");
+											boolean tempB = false;
+											for(int i = 0; i < 3; i++){
+												if(i == 0 || i == 2){
+													System.out.println(" -------------");
+												}
+												else{
+													System.out.println("| BANK TELLER |");
+												}
+											}
 											BankTeller existAcc = new BankTeller(accountNumber);
-											i = existAcc.toDoPrompt();
-											if(i == true){
+											tempB = existAcc.toDoPrompt();
+											if(tempB == true){
 												exitI = true;
 												a = true;
 											}
 											exitI2 = true;
 											break;
 										case 2:
-											System.out.println("\nWelcome to the ATM");
+											for(int i = 0; i < 3; i++){
+												if(i == 0 || i == 2){
+													System.out.println(" -----");
+												}
+												else{
+													System.out.println("| ATM |");
+												}
+											}
 											boolean exit = false;
 											while(!exit ) {
-												System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
+												System.out.println("\nWithdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
 												choice = input.nextInt();
 												switch (choice) {
 													case 1:
@@ -124,11 +160,12 @@ public class Bank {
 											}
 
 											try{
+												System.out.println(accountNumber);
 												File f = new File(accountNumber + ".txt");
 												fe.encrypt(f,f);
 											}catch (Exception ignore){
 											}
-
+											input.close();
 											System.out.println("You have been logged out\n");
 
 											accountNumber=0;
@@ -155,7 +192,7 @@ public class Bank {
 					}
 					BankTeller account = new BankTeller ();
 					account.justWrite();
-					System.out.println("Returned to main menu");
+					System.out.println("Returned to main menu\n\n");
 					break;
 			}
 
