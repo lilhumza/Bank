@@ -21,7 +21,7 @@ public class BankTeller {
 		this.lName = input.nextLine();
 
 		System.out.println("Your New Banking Information:");
-		
+
 		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
 		System.out.println("Account Number: "+ accNum);
 
@@ -95,20 +95,20 @@ public class BankTeller {
 	public boolean toDoPrompt() throws Exception {
 		boolean e = false, t = false;
 		while(e == false){
-		System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to exit");
-		switch (input.nextInt()) {
-			case 1:
-				changeTransactionHistory();
-				break;
-			case 2:
-				closeAccount();
-				t = true;
-				System.out.println("You have left the Bank Teller.\n");
-				e = true;
-				break;
-			default:
-				System.out.println("You have left the Bank Teller.\n");
-				e = true;
+			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to exit");
+			switch (input.nextInt()) {
+				case 1:
+					changeTransactionHistory();
+					break;
+				case 2:
+					closeAccount();
+					t = true;
+					System.out.println("You have left the Bank Teller.\n");
+					e = true;
+					break;
+				default:
+					System.out.println("You have left the Bank Teller.\n");
+					e = true;
 			}
 		}
 		return t;
