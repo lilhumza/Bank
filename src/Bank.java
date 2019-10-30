@@ -47,7 +47,7 @@ public class Bank {
 							fe.decrypt(f,f);
 						}catch (Exception ignore){
 						}
-						
+
 						ATM atm = new ATM (accountNumber,accountPin);
 						t = atm.approveCredentials(accountNumber, accountPin);
 
@@ -70,7 +70,7 @@ public class Bank {
 										System.out.println("| BANK |");
 									}
 								}
-								
+
 								System.out.println("Where would you like to go?\n1. Bankteller\n2. Atm\n3. LogOut");
 								choice = input.nextInt();
 								exitI2 = false;
@@ -95,17 +95,17 @@ public class Bank {
 											exitI2 = true;
 											break;
 										case 2:
-											for(int i = 0; i < 3; i++){
-												if(i == 0 || i == 2){
-													System.out.println(" -----");
-												}
-												else{
-													System.out.println("| ATM |");
-												}
-											}
 											boolean exit = false;
 											while(!exit ) {
-												System.out.println("\nWithdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
+												for(int i = 0; i < 3; i++){
+													if(i == 0 || i == 2){
+														System.out.println(" -----");
+													}
+													else{
+														System.out.println("| ATM |");
+													}
+												}
+												System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
 												choice = input.nextInt();
 												switch (choice) {
 													case 1:
@@ -198,7 +198,3 @@ public class Bank {
 
 		}
 
-
-
-	}
-}
