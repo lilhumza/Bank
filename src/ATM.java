@@ -18,6 +18,7 @@ public class ATM {
     }
 
     public boolean approveCredentials(int accountNumber, int pinNumber){
+    	try{
         ArrayList<String> accountInfo = readAccountInfo(accountNumber);
         storedAccountNumber = accountInfo.get(2);
         storedPinNumber = accountInfo.get(3);
@@ -26,6 +27,8 @@ public class ATM {
                 return approved = true;
             }
         }
+    	}catch (Exception ignore){
+    	}
         return approved = false;
     }
 
@@ -86,9 +89,7 @@ public class ATM {
             }
             readFile.close();
             in.close();
-        } catch (Exception e) {
-            System.out.println("Account does not exist");
-            System.err.println("IOException: " + e.getMessage());
+        } catch (Exception ignore) {
         }
         return accountValues;
     }
