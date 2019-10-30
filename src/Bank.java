@@ -36,9 +36,8 @@ public class Bank {
 							fe.decrypt(f,f);
 						}catch (Exception ignore){
 						}
-
+						
 						ATM atm = new ATM (accountNumber,accountPin);
-
 						t = atm.approveCredentials(accountNumber, accountPin);
 
 						if(t == false){
