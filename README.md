@@ -56,7 +56,7 @@
 - Implemented security questions (almost)
 - Reimplemented the Account class since it wasnt even being used in the code for some reason
 
-***Needs Work ***
+***Needs Work***
 - Use binary searching to generate unique random numbers for the accountNum.
 - Transaction history needs to be fixed.
 - Write the security questions one line above the file.
