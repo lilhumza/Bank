@@ -8,6 +8,7 @@ public class BankTeller {
 	String fName, lName;
 	int accNum, accPin;
 	double balance;
+	boolean pinCheck;
 	ArrayList<String> transactionHistory = new ArrayList<String>();
 	public static ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
 	public static String [] questions = new String [3];
@@ -26,6 +27,7 @@ public class BankTeller {
             this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
             System.out.println("Account number: " + accNum);
             
+	        
 	        System.out.println("Enter your account pin.");
 	        accPin = input.nextInt();
 	        int length = String.valueOf(this.accPin).length();
@@ -36,7 +38,7 @@ public class BankTeller {
 			        this.accPin = input.nextInt();
 			        length = String.valueOf(this.accPin).length();
 		        	}   
-
+	       
 	        this.balance = 0.00;
 	        
 	        String user = input.nextLine();
@@ -106,11 +108,12 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
-			writeFile.write("0");
-			writeFile.newLine();
 			for(int i = 0; i < 3 ; i++){
 				writeFile.write(answers[i] + " ");
 			}
+			writeFile.newLine();
+			writeFile.write("0");
+
 			writeFile.close();
 			out.close();
 
@@ -121,6 +124,7 @@ public class BankTeller {
 
 	}
 	public boolean toDoPrompt() throws Exception {
+		securityQuestions();
 		boolean e = false, t = false;
 		while(e == false){
 			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Check your account information.\n3. Close Account\nType any other number to exit");
@@ -130,23 +134,7 @@ public class BankTeller {
 					break;
 				case 2:
 					Account acc = new Account();
-					System.out.println("In order to check your account information, you need to answer your security questions.");
-					System.out.println(questions [0]);
-					input.nextLine();
-					if (input.nextLine().equalsIgnoreCase(answers [0])) {
-						System.out.println(questions [1]);
-						if (input.nextLine().equalsIgnoreCase(answers [1])) {
-							System.out.println(questions [2]);
-							if (input.nextLine().equalsIgnoreCase(answers [2])) {
-								
-								acc.readFile();
-							}
-						}
-					}
-					else {
-						System.out.println("You have incorrectly one of these quesions.");
-						System.out.println("");
-					}
+					acc.readFile();
 					break;
 				case 3:	
 					closeAccount();
@@ -183,6 +171,29 @@ public class BankTeller {
 			System.out.println("Current Balance: "+balance);
 		}
 	}
+	
+	public void securityQuestions() throws Exception {
+		
+		String user; 
+		System.out.println("In order to use BankTeller services, you need to answer your security questions.");
+		System.out.println(questions [0]);
+		user = input.nextLine();
+		if (user.equalsIgnoreCase(answers [0])) {
+			System.out.println(questions [1]);
+			if (input.nextLine().equalsIgnoreCase(answers [1])) {
+				System.out.println(questions [2]);
+				if (input.nextLine().equalsIgnoreCase(answers [2])) {
+					
+					System.out.println("You have correctly answered these questions.");
+				}
+			}
+		}
+		else {
+			System.out.println("You have incorrectly one of these quesions.");
+			System.out.println("");
+		}
+	}
+	
 	public void changeTransactionHistory() {
 
 		if (transactionHistory.contains("0")) {
