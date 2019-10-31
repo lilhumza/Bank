@@ -32,12 +32,21 @@ public class BankTeller {
 		System.out.println("Enter your account pin.");
 		accPin = input.nextInt();
 		int length = String.valueOf(this.accPin).length();
+		
+		boolean isValidPin = isNum(Integer.toString(accPin));
 
-		while (length != 4) {
+		while (length != 4 || isValidPin == false) {
+			if (isValidPin == false){
+				System.out.println("Pins cannot contain letters. Please enter a valid pin. ");
+				accPin = input.nextInt();
+				isValidPin = isNum(Integer.toString(accPin));
+				length = String.valueOf(this.accPin).length();
+			}
 			System.out.println("Please ensure that your PIN is 4 digits long.");
 			System.out.println("Enter your account pin.");
 			this.accPin = input.nextInt();
 			length = String.valueOf(this.accPin).length();
+			isValidPin = isNum(Integer.toString(accPin));
 		}
 
 		this.balance = 0.00;
@@ -280,6 +289,16 @@ public class BankTeller {
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
 		}
+	}
+
+	public static boolean isNum(String userInput)
+	{
+		try {
+			double d = Double.parseDouble(userInput);
+		} catch (NumberFormatException | NullPointerException nfe) {
+			return false;
+		}
+		return true;
 	}
 
 }
