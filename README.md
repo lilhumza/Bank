@@ -51,6 +51,11 @@
 - User can now enter the PIN number they want
 - The same number cannot be generated from the accountNum
 
+***Update October 31, 2019***
+
+- Implemented security questions (almost)
+- Reimplemented the Account class since it wasnt even being used in the code for some reason
+
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
 - BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
