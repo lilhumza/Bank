@@ -48,6 +48,8 @@
 
 ***Update October 30, 2019***
 - Major aesthetic changes
+- User can now enter the PIN number they want
+- The same number cannot be generated from the accountNum
 
 ***Needs Work (ATM & BankTeller)***
 - ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
