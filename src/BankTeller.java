@@ -5,36 +5,61 @@ import java.util.*;
 public class BankTeller {
 
 	Scanner input = new Scanner (System.in);
-	String fName;
-	String lName;
-	int accNum;
-	int accPin;
+	String fName, lName;
+	int accNum, accPin;
 	double balance;
 	ArrayList<String> transactionHistory = new ArrayList<String>();
+	public static ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
 
-	//New Account
+	// new Account
 	public BankTeller() {
 
-		System.out.print("What is your first Name: ");
-		this.fName = input.nextLine();
-		System.out.print("\nWhat is your last Name: ");
-		this.lName = input.nextLine();
+		    System.out.print("What is your first Name: ");
+	        this.fName = input.nextLine();
+	        System.out.print("\nWhat is your last Name: ");
+	        this.lName = input.nextLine();
 
-		System.out.println("Your New Banking Information:");
+	        System.out.println("Your New Banking Information:");
+	        
+            this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
+	        
+	        if (randomNumbers.size() == 0) {
+		    randomNumbers.add(accNum);
+	        System.out.println("Account Number: "+ accNum);
+	        }
+	        
+	        else {
+		        randomNumbers.add(accNum);
+	        	for (int i = 0; i < randomNumbers.size(); i++) {
+//	        		if (randomNumbers.contains(accNum) == true)
+//	        		{
+//	        	        System.out.println(randomNumbers.get(i));
+//	        		}
+	        		if (randomNumbers.contains(accNum) == false)
+	        	        System.out.println("Account Number: "+ accNum);
+	        	}
+	        }
+	        
+	        System.out.println("Enter your account pin.");
+	        accPin = input.nextInt();
+	        int length = String.valueOf(this.accPin).length();
+	        
+		        do {
+		        	System.out.println("Please ensure that your PIN is 4 digits long.");
+			        System.out.println("Enter your account pin.");
+			        this.accPin = input.nextInt();
+			        length = String.valueOf(this.accPin).length();
+		        	} while (length != 4);
+		        
+		        System.out.println("Account Pin: "+ accPin);
 
-		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
-		System.out.println("Account Number: "+ accNum);
-
-		this.accPin = (int) (Math.random() * ((9999-1000)+1)+1000);
-		System.out.println("Account Pin: "+ accPin);
-
-		this.balance = 0.00;
+	        this.balance = 0.00;
 	}
 
-	//Have account and want to change transaction history
+	// have account and want to change transaction history
 	public BankTeller (int accNumber) {
 
-		//Create a file reader to pull info from txt file.
+		// create a file reader to pull info from txt file.
 
 		this.accNum = accNumber;
 
@@ -172,7 +197,6 @@ public class BankTeller {
 
 		}
 	}
-
 
 	public void closeAccount() throws IOException { //Parameter filename is the cardNum as a string aka foldername
 
