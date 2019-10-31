@@ -171,7 +171,6 @@ public class Bank {
 											}catch (Exception ignore){
 												System.out.println("g");
 											}
-											input.close();
 											System.out.println("You have been logged out\n");
 
 											accountNumber=0;
