@@ -31,11 +31,16 @@ public class Account {
 			try {
 				read = new FileReader(f);
 				buffRead = new BufferedReader(read);
-				for (int i = 0; i < 6; i++)
-				{
-					System.out.println(buffRead.readLine());
+				
+				System.out.println("First name: " + buffRead.readLine());
+				System.out.println("Last name: " + buffRead.readLine());
+				System.out.println("Account number: " + buffRead.readLine());
+				System.out.println("Account pin: " + buffRead.readLine());
+				System.out.println("Balance: $" + buffRead.readLine());
+				System.out.println("Transaction History: " + buffRead.readLine());
+				System.out.println("Security questions: " + buffRead.readLine());
+				System.out.println("");
 
-				}
 			} catch (FileNotFoundException e1) {
 			} catch (IOException e) {
 			}
