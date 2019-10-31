@@ -59,17 +59,6 @@
 ***Needs Work***
 - Use binary searching to generate unique random numbers for the accountNum.
 - Transaction history needs to be fixed.
-- Write the security questions one line above the file.
-- Remove the ask for accountNum when the user wants to check their account information.
 - For the pin number, if they enter a string, it says wrong data type inputted.
 - If the user forgot their PIN number, they cna click a button for hte security questions. 
 - Document the code using comments.
-
-***Tasks***
-- Security Questions
- - For the security questions, make an arraylist that the questions are added to, and make it keep reminding them.
-- Making sure that it does not generate the same random number for the account file.
-- Let user choose their own PIN.
-- Change account number to 6 digits.
-- Transfer balances from one account to another account.
-- Make accounts that are limited and do not have as much capabilites as main accounts (i.e. student/children accounts). (Maybe)
