@@ -1,6 +1,6 @@
+import java.util.*;
 import java.io.*;
 import java.nio.file.*;
-import java.util.*;
 
 public class BankTeller {
 
@@ -10,9 +10,11 @@ public class BankTeller {
 	double balance;
 	ArrayList<String> transactionHistory = new ArrayList<String>();
 	public static ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
+	public static String [] questions = new String [3];
+	public static String [] answers = new String [3];
 
 	// new Account
-	public BankTeller() {
+		public BankTeller() {
 
 		    System.out.print("What is your first Name: ");
 	        this.fName = input.nextLine();
@@ -22,40 +24,38 @@ public class BankTeller {
 	        System.out.println("Your New Banking Information:");
 	        
             this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
-	        
-	        if (randomNumbers.size() == 0) {
-		    randomNumbers.add(accNum);
-	        System.out.println("Account Number: "+ accNum);
-	        }
-	        
-	        else {
-		        randomNumbers.add(accNum);
-	        	for (int i = 0; i < randomNumbers.size(); i++) {
-//	        		if (randomNumbers.contains(accNum) == true)
-//	        		{
-//	        	        System.out.println(randomNumbers.get(i));
-//	        		}
-	        		if (randomNumbers.contains(accNum) == false)
-	        	        System.out.println("Account Number: "+ accNum);
-	        	}
-	        }
-	        
+            System.out.println("Account number: " + accNum);
+            
 	        System.out.println("Enter your account pin.");
 	        accPin = input.nextInt();
 	        int length = String.valueOf(this.accPin).length();
 	        
-		        do {
+	        	while (length != 4) {
 		        	System.out.println("Please ensure that your PIN is 4 digits long.");
 			        System.out.println("Enter your account pin.");
 			        this.accPin = input.nextInt();
 			        length = String.valueOf(this.accPin).length();
-		        	} while (length != 4);
-		        
-		        System.out.println("Account Pin: "+ accPin);
+		        	}   
 
 	        this.balance = 0.00;
+	        
+	        String user = input.nextLine();
+	        
+			System.out.println("Now, you will be activating your security questions for enhanced security.");
+			questions [0] = "What is your favorite book?";
+			System.out.println(questions[0]);
+			user = input.nextLine();
+			answers[0] = user;
+			questions [1] = "What city were you born in?";
+			System.out.println(questions[1]);
+			user = input.nextLine();
+			answers[1] = user;
+			questions [2] = "Where did you go to high school/college?";
+			System.out.println(questions[2]);
+			user = input.nextLine();
+			answers[2] = user;
 	}
-
+	        	
 	// have account and want to change transaction history
 	public BankTeller (int accNumber) {
 
@@ -107,6 +107,13 @@ public class BankTeller {
 			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
 			writeFile.write("0");
+			writeFile.newLine();
+			writeFile.write(answers[0]);
+			writeFile.write(" ");
+			writeFile.write(answers[1]);
+			writeFile.write(" ");
+			writeFile.write(answers[2]);
+			writeFile.write(" ");
 
 			writeFile.close();
 			out.close();
@@ -120,12 +127,32 @@ public class BankTeller {
 	public boolean toDoPrompt() throws Exception {
 		boolean e = false, t = false;
 		while(e == false){
-			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Close Account\nType any other number to exit");
+			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Check your account information.\n3. Close Account\nType any other number to exit");
 			switch (input.nextInt()) {
 				case 1:
 					changeTransactionHistory();
 					break;
 				case 2:
+					Account acc = new Account();
+					System.out.println("In order to check your account information, you need to answer your security questions.");
+					System.out.println(questions [0]);
+					input.nextLine();
+					if (input.nextLine().equalsIgnoreCase(answers [0])) {
+						System.out.println(questions [1]);
+						if (input.nextLine().equalsIgnoreCase(answers [1])) {
+							System.out.println(questions [2]);
+							if (input.nextLine().equalsIgnoreCase(answers [2])) {
+								
+								acc.readFile();
+							}
+						}
+					}
+					else {
+						System.out.println("You have incorrectly one of these quesions.");
+						System.out.println("");
+					}
+					break;
+				case 3:	
 					closeAccount();
 					t = true;
 					System.out.println("You have left the Bank Teller.\n");
@@ -240,8 +267,6 @@ public class BankTeller {
 				}
 			}
 
-
-
 			writeFile.close();
 			out.close();
 
@@ -250,5 +275,4 @@ public class BankTeller {
 			System.err.println("IOException: " + e.getMessage());
 		}
 	}
-
 }
