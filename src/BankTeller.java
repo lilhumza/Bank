@@ -108,13 +108,9 @@ public class BankTeller {
 			writeFile.newLine();
 			writeFile.write("0");
 			writeFile.newLine();
-			writeFile.write(answers[0]);
-			writeFile.write(" ");
-			writeFile.write(answers[1]);
-			writeFile.write(" ");
-			writeFile.write(answers[2]);
-			writeFile.write(" ");
-
+			for(int i = 0; i < 3 ; i++){
+				writeFile.write(answers[i] + " ");
+			}
 			writeFile.close();
 			out.close();
 
