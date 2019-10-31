@@ -11,53 +11,51 @@ public class BankTeller {
 	boolean pinCheck;
 	ArrayList<String> transactionHistory = new ArrayList<String>();
 	public static ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
-	public static String [] questions = new String [3];
+	public static String [] questions = {"What is your favorite book?", "What city were you born in?", "Where did you go to high school/college?"};
 	public static String [] answers = new String [3];
 
 	// new Account
-		public BankTeller() {
 
-		    System.out.print("What is your first Name: ");
-	        this.fName = input.nextLine();
-	        System.out.print("\nWhat is your last Name: ");
-	        this.lName = input.nextLine();
+	public BankTeller() {
 
-	        System.out.println("Your New Banking Information:");
-	        
-            this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
-            System.out.println("Account number: " + accNum);
-            
-	        
-	        System.out.println("Enter your account pin.");
-	        accPin = input.nextInt();
-	        int length = String.valueOf(this.accPin).length();
-	        
-	        	while (length != 4) {
-		        	System.out.println("Please ensure that your PIN is 4 digits long.");
-			        System.out.println("Enter your account pin.");
-			        this.accPin = input.nextInt();
-			        length = String.valueOf(this.accPin).length();
-		        	}   
-	       
-	        this.balance = 0.00;
-	        
-	        String user = input.nextLine();
-	        
-			System.out.println("Now, you will be activating your security questions for enhanced security.");
-			questions [0] = "What is your favorite book?";
-			System.out.println(questions[0]);
-			user = input.nextLine();
-			answers[0] = user;
-			questions [1] = "What city were you born in?";
-			System.out.println(questions[1]);
-			user = input.nextLine();
-			answers[1] = user;
-			questions [2] = "Where did you go to high school/college?";
-			System.out.println(questions[2]);
-			user = input.nextLine();
-			answers[2] = user;
+		System.out.print("What is your first Name: ");
+		this.fName = input.nextLine();
+		System.out.print("\nWhat is your last Name: ");
+		this.lName = input.nextLine();
+
+		System.out.println("Your New Banking Information:");
+
+		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
+		System.out.println("Account number: " + accNum);
+
+
+		System.out.println("Enter your account pin.");
+		accPin = input.nextInt();
+		int length = String.valueOf(this.accPin).length();
+
+		while (length != 4) {
+			System.out.println("Please ensure that your PIN is 4 digits long.");
+			System.out.println("Enter your account pin.");
+			this.accPin = input.nextInt();
+			length = String.valueOf(this.accPin).length();
+		}
+
+		this.balance = 0.00;
+
+		String user = input.nextLine();
+
+		System.out.println("Now, you will be activating your security questions for enhanced security.");
+		System.out.println(questions[0]);
+		user = input.nextLine();
+		answers[0] = user;
+		System.out.println(questions[1]);
+		user = input.nextLine();
+		answers[1] = user;
+		System.out.println(questions[2]);
+		user = input.nextLine();
+		answers[2] = user;
 	}
-	        	
+
 	// have account and want to change transaction history
 	public BankTeller (int accNumber) {
 
@@ -136,7 +134,7 @@ public class BankTeller {
 					Account acc = new Account();
 					acc.readFile();
 					break;
-				case 3:	
+				case 3:
 					closeAccount();
 					t = true;
 					System.out.println("You have left the Bank Teller.\n");
@@ -171,10 +169,10 @@ public class BankTeller {
 			System.out.println("Current Balance: "+balance);
 		}
 	}
-	
+
 	public void securityQuestions() throws Exception {
-		
-		String user; 
+
+		String user;
 		System.out.println("In order to use BankTeller services, you need to answer your security questions.");
 		System.out.println(questions [0]);
 		user = input.nextLine();
@@ -183,7 +181,7 @@ public class BankTeller {
 			if (input.nextLine().equalsIgnoreCase(answers [1])) {
 				System.out.println(questions [2]);
 				if (input.nextLine().equalsIgnoreCase(answers [2])) {
-					
+
 					System.out.println("You have correctly answered these questions.");
 				}
 			}
@@ -193,9 +191,9 @@ public class BankTeller {
 			System.out.println("");
 		}
 	}
-	
-	public void changeTransactionHistory() {
 
+	public void changeTransactionHistory() {
+		System.out.println(transactionHistory);
 		if (transactionHistory.contains("0")) {
 			transactionHistory.remove("0");
 			if (transactionHistory.size() == 0){
