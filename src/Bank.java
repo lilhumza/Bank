@@ -1,4 +1,8 @@
+import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Bank {
@@ -46,6 +50,7 @@ public class Bank {
 							File f = new File(accountNumber + ".txt");
 							fe.decrypt(f,f);
 						}catch (Exception ignore){
+							System.out.println("o");
 						}
 
 						ATM atm = new ATM (accountNumber,accountPin);
@@ -164,6 +169,7 @@ public class Bank {
 												File f = new File(accountNumber + ".txt");
 												fe.encrypt(f,f);
 											}catch (Exception ignore){
+												System.out.println("g");
 											}
 											input.close();
 											System.out.println("You have been logged out\n");
@@ -191,10 +197,20 @@ public class Bank {
 						break;
 					}
 					BankTeller account = new BankTeller ();
+					int c = account.accNum;
 					account.justWrite();
 					System.out.println("Returned to main menu\n\n");
+					try{
+						File f = new File(c + ".txt");
+						fe.encrypt(f,f);
+					}catch (Exception ignore){
+						System.out.println("o");
+					}
 					break;
 			}
 
 		}
+	}
 
+
+}
