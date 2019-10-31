@@ -63,6 +63,7 @@
 - Remove the ask for accountNum when the user wants to check their account information.
 - For the pin number, if they enter a string, it says wrong data type inputted.
 - If the user forgot their PIN number, they cna click a button for hte security questions. 
+- Document the code using comments.
 
 ***Tasks***
 - Security Questions
