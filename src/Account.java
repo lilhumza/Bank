@@ -37,8 +37,8 @@ public class Account {
 				System.out.println("Account number: " + buffRead.readLine());
 				System.out.println("Account pin: " + buffRead.readLine());
 				System.out.println("Balance: $" + buffRead.readLine());
-				System.out.println("Transaction History: " + buffRead.readLine());
 				System.out.println("Security questions: " + buffRead.readLine());
+				System.out.println("Transaction History: " + buffRead.readLine());
 				System.out.println("");
 
 			} catch (FileNotFoundException e1) {
