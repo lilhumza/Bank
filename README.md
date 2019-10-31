@@ -56,11 +56,13 @@
 - Implemented security questions (almost)
 - Reimplemented the Account class since it wasnt even being used in the code for some reason
 
-***Needs Work (ATM & BankTeller)***
-- ability to cancel withdraw - Perhaps throw the cancel option in the main with the switch/case?
-- BankTellerMainTemo is a tester for the BankTeller and will be incorporated into the proper main
-- Need to include the balance in text files and BankTeller Methods
-- ability to view stats
+***Needs Work ***
+- Use binary searching to generate unique random numbers for the accountNum.
+- Transaction history needs to be fixed.
+- Write the security questions one line above the file.
+- Remove the ask for accountNum when the user wants to check their account information.
+- For the pin number, if they enter a string, it says wrong data type inputted.
+- If the user forgot their PIN number, they cna click a button for hte security questions. 
 
 ***Tasks***
 - Security Questions
