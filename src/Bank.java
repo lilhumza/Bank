@@ -40,7 +40,6 @@ public class Bank {
 				case 1:
 					while (t == false){
 
-
 						System.out.print("Enter your account number: ");
 						accountNumber = input.nextInt();
 						System.out.print("Enter your PIN: ");
