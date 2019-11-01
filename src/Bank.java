@@ -49,7 +49,6 @@ public class Bank {
 							File f = new File(accountNumber + ".txt");
 							fe.decrypt(f,f);
 						}catch (Exception ignore){
-							System.out.println("o");
 						}
 
 						ATM atm = new ATM (accountNumber,accountPin);
@@ -172,7 +171,6 @@ public class Bank {
 												a = true;
 												break;
 											}
-
 											try{
 												System.out.println(accountNumber);
 												File f = new File(accountNumber + ".txt");
@@ -212,7 +210,6 @@ public class Bank {
 						File f = new File(c + ".txt");
 						fe.encrypt(f,f);
 					}catch (Exception ignore){
-						System.out.println("o");
 					}
 					break;
 			}
