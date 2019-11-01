@@ -132,7 +132,6 @@ public class BankTeller {
 
 	}
 	public boolean toDoPrompt() throws Exception {
-		securityQuestions();
 		boolean e = false, t = false;
 		while(e == false){
 			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Check your account information.\n3. Close Account\nType any other number to exit");
