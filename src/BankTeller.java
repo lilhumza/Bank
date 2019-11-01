@@ -84,8 +84,14 @@ public class BankTeller {
 			this.accNum = Integer.parseInt(readFile.readLine()); //Reads third line and adds to accNum
 			this.accPin = Integer.parseInt(readFile.readLine()); //Reads fourth line and adds to accPin
 			this.balance = Double.parseDouble(readFile.readLine());//Reads fifth line and adds to balance
-			readFile.readLine();
+			
 			String[] splitStr = readFile.readLine().split(" ");
+
+			for (int i = 0; i < splitStr.length; i++){
+				answers[i] = splitStr[i];
+			}
+			
+			splitStr = readFile.readLine().split(" ");
 
 			for (int i = 0; i < splitStr.length; i++){
 				this.transactionHistory.add(splitStr[i]);
