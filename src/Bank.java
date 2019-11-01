@@ -1,11 +1,12 @@
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Bank {
+	
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+    static StringTokenizer st;
+	
 	public static void main(String[] args) throws Exception {
 
 		FileEncryption fe = new FileEncryption();
@@ -13,7 +14,6 @@ public class Bank {
 		int choice, accountNumber, accountPin;
 		boolean exitO = false, exitI = false, exitI2 = false, t = false, a = false;
 
-		Scanner input = new Scanner (System.in);
 		java.util.Date date = new java.util.Date();
 
 		System.out.println("TD Banking  - " + date + "\nHello, thank you for choosing to bank with TD.");
@@ -29,7 +29,7 @@ public class Bank {
 				}
 			}
 			System.out.println("(1) SignIn\n(2) SignUp\n(3) Exit");
-			choice = input.nextInt();
+			choice = readInt();
 			if(choice == 3){
 				System.exit(1);
 			}
@@ -41,9 +41,9 @@ public class Bank {
 					while (t == false){
 
 						System.out.print("Enter your account number: ");
-						accountNumber = input.nextInt();
+						accountNumber = readInt();
 						System.out.print("Enter your PIN: ");
-						accountPin = input.nextInt();
+						accountPin = readInt();
 
 						try{
 							File f = new File(accountNumber + ".txt");
@@ -56,7 +56,7 @@ public class Bank {
 
 						if(t == false){
 							System.out.println("Incorrect account number or account PIN.\n(1) Try again.\n(2) Create New Account\n");
-							choice = input.nextInt();
+							choice = readInt();
 							if(choice == 2){
 								t = true;
 								exitI = true;
@@ -75,7 +75,7 @@ public class Bank {
 								}
 
 								System.out.println("Where would you like to go?\n1. Bankteller\n2. Atm\n3. LogOut");
-								choice = input.nextInt();
+								choice = readInt();
 								exitI2 = false;
 								while (exitI2 == false){
 									switch (choice){
@@ -119,7 +119,7 @@ public class Bank {
 													}
 												}
 												System.out.println("Withdraw (1)\nDeposit $ (2)\nDisplay Transaction History (3)\nBank Balance Enquiry (4)\nExchange Currency (5)\nExit (6)");
-												choice = input.nextInt();
+												choice = readInt();
 												switch (choice) {
 													case 1:
 
@@ -143,15 +143,15 @@ public class Bank {
 														break;
 													case 5:
 														System.out.println("USD -> CAD(1)\nCAD -> USD (2)");
-														choice = input.nextInt();
+														choice = readInt();
 														if (choice == 1){
 															System.out.println("Please enter your USD");
-															double money = input.nextDouble();
+															double money = readDouble();
 															atm.exchangeCurrency(1, money);
 														}
 														else{
 															System.out.println("Please enter your CAD");
-															double money = input.nextDouble();
+															double money = readDouble();
 															atm.exchangeCurrency(2, money);
 														}
 														break;
@@ -215,6 +215,29 @@ public class Bank {
 			}
 
 		}
+		
 	}
+	
+	static String next () throws IOException {
+  	  while (st == null || !st.hasMoreTokens())
+  		  st = new StringTokenizer(br.readLine().trim());
+  	  return st.nextToken();
+    }
+    
+  static long readLong () throws IOException {
+  	  return Long.parseLong(next());
+  }
+
+  static int readInt () throws IOException {
+  	  return Integer.parseInt(next());
+  }
+
+  static double readDouble () throws IOException {
+  	  return Double.parseDouble(next());
+  }
+    
+  static String readLine () throws IOException {
+  	  return br.readLine().trim();
+  } 
 
 }
