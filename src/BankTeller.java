@@ -180,7 +180,7 @@ public class BankTeller {
 		}
 	}
 
-	public void securityQuestions() throws Exception {
+	public boolean securityQuestions() throws Exception {
 
 		String user;
 		System.out.println("In order to use BankTeller services, you need to answer your security questions.");
@@ -193,13 +193,23 @@ public class BankTeller {
 				if (input.nextLine().equalsIgnoreCase(answers [2])) {
 
 					System.out.println("You have correctly answered these questions.");
+					return true;
 				}
+			}
+			else {
+				System.out.println("You have incorrectly one of these questions.");
+				System.out.println("");
+				return false;
 			}
 		}
 		else {
-			System.out.println("You have incorrectly one of these quesions.");
+			System.out.println("You have incorrectly one of these questions.");
 			System.out.println("");
+			return false;
 		}
+		
+		return false;
+		
 	}
 
 	public void changeTransactionHistory() {
@@ -235,7 +245,6 @@ public class BankTeller {
 				System.out.println("Updated Transaction History: \n"+transactionHistory);
 				writeInfo();
 			}
-
 
 		}
 	}
