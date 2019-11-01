@@ -32,21 +32,20 @@ public class BankTeller {
 		this.accNum = (int) (Math.random() * ((999999-100000)+1)+100000);
 		System.out.println("Account number: " + accNum);
 
-
 		System.out.println("Enter your account pin.");
-		String aPin = readLine();
+		
+		String aPin;
+		aPin = readLine();
 		int length = String.valueOf(aPin).length();
 
 		boolean isValidPin = isNum(aPin);
 
 		while (length != 4 || isValidPin == false) {
-			int count = 0;
 			if (isValidPin == false){
 				System.out.println("Pins cannot contain letters. Please enter a valid pin. ");
 				aPin = readLine();
 				isValidPin = isNum(aPin);
 				length = String.valueOf(aPin).length();
-				count++;
 			}
 			else {
 				System.out.println("Please ensure that your PIN is 4 digits long.");
@@ -54,16 +53,14 @@ public class BankTeller {
 				aPin = readLine();
 				length = String.valueOf(aPin).length();
 				isValidPin = isNum(aPin);
-				count++;
 			}
 		}
 		this.accPin = Integer.parseInt(aPin);
 
 		this.balance = 0.00;
 
-		String user = readLine();
-
 		System.out.println("Now, you will be activating your security questions for enhanced security.");
+		String user;
 		System.out.println(questions[0]);
 		user = readLine();
 		answers[0] = user;
@@ -137,12 +134,18 @@ public class BankTeller {
 			}
 			writeFile.newLine();
 			if (transactionHistory.size() == 0) {
-			writeFile.write("0 ");
+			writeFile.write("0");
 			}
 			else {
 				writeFile.write("0");
 				for (int i = 0; i < transactionHistory.size(); i++) {
-					writeFile.write(transactionHistory.get(i) + " ");
+					if (i == 0)
+					{
+						writeFile.write(transactionHistory.get(i));
+					}
+					else {
+						writeFile.write(transactionHistory.get(i) + " ");
+					}
 				}
 			}
 
@@ -272,6 +275,7 @@ public class BankTeller {
 			}
 
 		}
+		
 	}
 
 	public void closeAccount() throws IOException { //Parameter filename is the cardNum as a string aka foldername
