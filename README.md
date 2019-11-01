@@ -57,8 +57,5 @@
 - Reimplemented the Account class since it wasnt even being used in the code for some reason
 
 ***Needs Work***
-- Use binary searching to generate unique random numbers for the accountNum.
-- Transaction history needs to be fixed.
-- For the pin number, if they enter a string, it says wrong data type inputted.
-- If the user forgot their PIN number, they cna click a button for hte security questions. 
+- Transaction history needs to be fixed, by making sure that the whole thing isn't deleted when the user wants to change it.
 - Document the code using comments.
