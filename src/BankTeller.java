@@ -4,6 +4,10 @@ import java.nio.file.*;
 
 public class BankTeller {
 
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+    static StringTokenizer st;
+	
 	Scanner input = new Scanner (System.in);
 	String fName, lName;
 	int accNum, accPin;
@@ -16,12 +20,12 @@ public class BankTeller {
 
 	// new Account
 
-	public BankTeller() {
+	public BankTeller() throws Exception{
 
 		System.out.print("What is your first Name: ");
-		this.fName = input.nextLine();
+		this.fName = readLine();
 		System.out.print("\nWhat is your last Name: ");
-		this.lName = input.nextLine();
+		this.lName = readLine();
 
 		System.out.println("Your New Banking Information:");
 
@@ -30,7 +34,7 @@ public class BankTeller {
 
 
 		System.out.println("Enter your account pin.");
-		String aPin = input.nextLine();
+		String aPin = readLine();
 		int length = String.valueOf(aPin).length();
 
 		boolean isValidPin = isNum(aPin);
@@ -39,7 +43,7 @@ public class BankTeller {
 			int count = 0;
 			if (isValidPin == false){
 				System.out.println("Pins cannot contain letters. Please enter a valid pin. ");
-				aPin = input.nextLine();
+				aPin = readLine();
 				isValidPin = isNum(aPin);
 				length = String.valueOf(aPin).length();
 				count++;
@@ -47,7 +51,7 @@ public class BankTeller {
 			else {
 				System.out.println("Please ensure that your PIN is 4 digits long.");
 				System.out.println("Enter your account pin.");
-				aPin = input.nextLine();
+				aPin = readLine();
 				length = String.valueOf(aPin).length();
 				isValidPin = isNum(aPin);
 				count++;
@@ -57,17 +61,17 @@ public class BankTeller {
 
 		this.balance = 0.00;
 
-		String user = input.nextLine();
+		String user = readLine();
 
 		System.out.println("Now, you will be activating your security questions for enhanced security.");
 		System.out.println(questions[0]);
-		user = input.nextLine();
+		user = readLine();
 		answers[0] = user;
 		System.out.println(questions[1]);
-		user = input.nextLine();
+		user = readLine();
 		answers[1] = user;
 		System.out.println(questions[2]);
-		user = input.nextLine();
+		user = readLine();
 		answers[2] = user;
 	}
 
@@ -155,7 +159,8 @@ public class BankTeller {
 		boolean e = false, t = false;
 		while(e == false){
 			System.out.println("What would you like to do?\n1. Change Transaction History\n2. Check your account information.\n3. Close Account\nType any other number to exit");
-			switch (input.nextInt()) {
+			int choice = readInt();
+			switch (choice) {
 				case 1:
 					changeTransactionHistory();
 					break;
@@ -176,23 +181,23 @@ public class BankTeller {
 		}
 		return t;
 	}
-	public void deposit() {
+	public void deposit() throws Exception{
 		System.out.println("Enter deposit amount: ");
-		double amount = input.nextDouble();
+		double amount = readDouble();
 		balance += amount;
 		transactionHistory.add("+"+amount);
 		System.out.println("Current Balance: "+balance);
 
 	}
 
-	public void withDraw() {
+	public void withDraw() throws Exception{
 
 		if (balance <= 0.00){
 			System.out.println("No Money in Account! Deposit First!");
 			balance = 0.00;
 		} else {
 			System.out.println("Enter withdrawal amount: ");
-			double amount = input.nextDouble();
+			double amount = readDouble();
 			balance -= amount;
 			transactionHistory.add("-"+amount);
 			System.out.println("Current Balance: "+balance);
@@ -204,12 +209,14 @@ public class BankTeller {
 		String user;
 		System.out.println("In order to use BankTeller services, you need to answer your security questions.");
 		System.out.println(questions [0]);
-		user = input.nextLine();
+		user = readLine();
 		if (user.equalsIgnoreCase(answers [0])) {
 			System.out.println(questions [1]);
-			if (input.nextLine().equalsIgnoreCase(answers [1])) {
+			String ans = readLine();
+			if (ans.equalsIgnoreCase(answers [1])) {
 				System.out.println(questions [2]);
-				if (input.nextLine().equalsIgnoreCase(answers [2])) {
+				ans = readLine();
+				if (ans.equalsIgnoreCase(answers [2])) {
 
 					System.out.println("You have correctly answered these questions.");
 					return true;
@@ -241,7 +248,7 @@ public class BankTeller {
 			else {
 				System.out.println("Current History: \n"+transactionHistory);
 				System.out.println("Remove Transaction at index:");
-				int index = input.nextInt();
+				int index = readInt();
 				index -=1;
 
 				System.out.println("Removing Transaction: "+transactionHistory.get(index));
@@ -291,5 +298,27 @@ public class BankTeller {
 		}
 		return true;
 	}
+	
+	static String next () throws IOException {
+  	  while (st == null || !st.hasMoreTokens())
+  		  st = new StringTokenizer(br.readLine().trim());
+  	  return st.nextToken();
+    }
+    
+  static long readLong () throws IOException {
+  	  return Long.parseLong(next());
+  }
+
+  static int readInt () throws IOException {
+  	  return Integer.parseInt(next());
+  }
+
+  static double readDouble () throws IOException {
+  	  return Double.parseDouble(next());
+  }
+    
+  static String readLine () throws IOException {
+  	  return br.readLine().trim();
+  } 
 
 }
