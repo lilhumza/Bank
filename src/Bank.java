@@ -83,6 +83,7 @@ public class Bank {
 									switch (choice){
 										case 1:
 											boolean tempB = false;
+											boolean tempC = false;
 											for(int i = 0; i < 3; i++){
 												if(i == 0 || i == 2){
 													System.out.println(" -------------");
@@ -91,9 +92,17 @@ public class Bank {
 													System.out.println("| BANK TELLER |");
 												}
 											}
+											
 											BankTeller existAcc = new BankTeller(accountNumber);
+											tempC = existAcc.securityQuestions();
+
 											tempB = existAcc.toDoPrompt();
 											if(tempB == true){
+												exitI = true;
+												a = true;
+											}
+											exitI2 = true;
+											if(tempC == true){
 												exitI = true;
 												a = true;
 											}
