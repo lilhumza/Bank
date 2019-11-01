@@ -132,7 +132,14 @@ public class BankTeller {
 				writeFile.write(answers[i] + " ");
 			}
 			writeFile.newLine();
+			if (transactionHistory.size() == 0) {
 			writeFile.write("0");
+			}
+			else {
+				for (int i = 0; i < transactionHistory.size(); i++) {
+					writeFile.write(transactionHistory.get(i));
+				}
+			}
 
 			writeFile.close();
 			out.close();
