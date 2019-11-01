@@ -290,6 +290,9 @@ public class BankTeller {
 			writeFile.write(String.valueOf(balance));
 			writeFile.newLine();
 			writeFile.write("0");
+			for(int i = 0; i < 3 ; i++){
+				writeFile.write(answers[i] + " ");
+			}
 			if (transactionHistory.size() > 0) {
 				for (int i = 0; i < transactionHistory.size(); i++) {
 					writeFile.write(transactionHistory.get(i)+" ");
