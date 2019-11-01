@@ -95,6 +95,9 @@ public class Bank {
 											
 											BankTeller existAcc = new BankTeller(accountNumber);
 											tempC = existAcc.securityQuestions();
+											while (tempC == false) {
+												tempC = existAcc.securityQuestions();
+											}
 
 											tempB = existAcc.toDoPrompt();
 											if(tempB == true){
