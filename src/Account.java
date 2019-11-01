@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Account {
+	
 	Scanner input = new Scanner (System.in);
 	String firstName, lastName, enterAccNumS, splitFile;
 	int pin, accountNum, enterAccNum, count;
