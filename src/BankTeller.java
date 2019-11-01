@@ -30,24 +30,30 @@ public class BankTeller {
 
 
 		System.out.println("Enter your account pin.");
-		accPin = input.nextInt();
-		int length = String.valueOf(this.accPin).length();
-		
-		boolean isValidPin = isNum(Integer.toString(accPin));
+		String aPin = input.nextLine();
+		int length = String.valueOf(aPin).length();
+
+		boolean isValidPin = isNum(aPin);
 
 		while (length != 4 || isValidPin == false) {
+			int count = 0;
 			if (isValidPin == false){
 				System.out.println("Pins cannot contain letters. Please enter a valid pin. ");
-				accPin = input.nextInt();
-				isValidPin = isNum(Integer.toString(accPin));
-				length = String.valueOf(this.accPin).length();
+				aPin = input.nextLine();
+				isValidPin = isNum(aPin);
+				length = String.valueOf(aPin).length();
+				count++;
 			}
-			System.out.println("Please ensure that your PIN is 4 digits long.");
-			System.out.println("Enter your account pin.");
-			this.accPin = input.nextInt();
-			length = String.valueOf(this.accPin).length();
-			isValidPin = isNum(Integer.toString(accPin));
+			else {
+				System.out.println("Please ensure that your PIN is 4 digits long.");
+				System.out.println("Enter your account pin.");
+				aPin = input.nextLine();
+				length = String.valueOf(aPin).length();
+				isValidPin = isNum(aPin);
+				count++;
+			}
 		}
+		this.accPin = Integer.parseInt(aPin);
 
 		this.balance = 0.00;
 
@@ -84,13 +90,13 @@ public class BankTeller {
 			this.accNum = Integer.parseInt(readFile.readLine()); //Reads third line and adds to accNum
 			this.accPin = Integer.parseInt(readFile.readLine()); //Reads fourth line and adds to accPin
 			this.balance = Double.parseDouble(readFile.readLine());//Reads fifth line and adds to balance
-			
+
 			String[] splitStr = readFile.readLine().split(" ");
 
 			for (int i = 0; i < splitStr.length; i++){
 				answers[i] = splitStr[i];
 			}
-			
+
 			splitStr = readFile.readLine().split(" ");
 
 			for (int i = 0; i < splitStr.length; i++){
@@ -212,9 +218,9 @@ public class BankTeller {
 			System.out.println("");
 			return false;
 		}
-		
+
 		return false;
-		
+
 	}
 
 	public void changeTransactionHistory() throws Exception {
