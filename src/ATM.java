@@ -4,11 +4,14 @@ import java.util.*;
 import java.nio.file.*;
 public class ATM {
 
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
+    static StringTokenizer st;
+	
     String storedAccountNumber;
     String storedPinNumber;
     boolean approved = false;
     boolean exit = false;
-    Scanner input = new Scanner(System.in);
 
     public ATM (int accountNumber, int pinNumber) throws IOException{
         super();
@@ -54,7 +57,7 @@ public class ATM {
         double balance =  Double.parseDouble(accountInfo.get(4));
         balance = round(balance, 2);
         System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
-        double withdrawAmount = input.nextDouble();
+        double withdrawAmount = readDouble();
         double newBalance = balance - withdrawAmount;
         newBalance = round(newBalance,2);
         updateBalance(accountNumber,5, Double.toString(newBalance));
@@ -68,7 +71,7 @@ public class ATM {
         double balance =  Double.parseDouble(accountInfo.get(4));
         balance = round(balance, 2);
         System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
-        double depositAmount = input.nextDouble();
+        double depositAmount = readDouble();
         double newBalance = balance + depositAmount;
         newBalance = round(newBalance,2);
         updateBalance(accountNumber,5, Double.toString(newBalance));
@@ -144,5 +147,27 @@ public class ATM {
         String line = Files.readAllLines(Paths.get(fileName)).get(4);
         System.out.println("Your current balance is: " + line);
     }
+    
+	static String next () throws IOException {
+  	  while (st == null || !st.hasMoreTokens())
+  		  st = new StringTokenizer(br.readLine().trim());
+  	  return st.nextToken();
+    }
+    
+  static long readLong () throws IOException {
+  	  return Long.parseLong(next());
+  }
+
+  static int readInt () throws IOException {
+  	  return Integer.parseInt(next());
+  }
+
+  static double readDouble () throws IOException {
+  	  return Double.parseDouble(next());
+  }
+    
+  static String readLine () throws IOException {
+  	  return br.readLine().trim();
+  } 
 
 }
