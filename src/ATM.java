@@ -34,7 +34,7 @@ public class ATM {
 
     public String transactionHistory(int accountNumber, boolean t) throws IOException{
         String fileName = Integer.toString(accountNumber) + ".txt";
-        String line = Files.readAllLines(Paths.get(fileName)).get(5);
+        String line = Files.readAllLines(Paths.get(fileName)).get(6);
         if (t){
             System.out.println("\nTransaction History\n" + line + "\n");
         }
