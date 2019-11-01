@@ -217,7 +217,7 @@ public class BankTeller {
 		
 	}
 
-	public void changeTransactionHistory() {
+	public void changeTransactionHistory() throws Exception {
 		System.out.println(transactionHistory);
 		if (transactionHistory.contains("0")) {
 			transactionHistory.remove("0");
@@ -248,7 +248,7 @@ public class BankTeller {
 
 				transactionHistory.remove(index);
 				System.out.println("Updated Transaction History: \n"+transactionHistory);
-				writeInfo();
+				justWrite();
 			}
 
 		}
@@ -266,45 +266,6 @@ public class BankTeller {
 		} catch (NoSuchFileException e) {
 
 			System.out.println("No Account Exists");
-		}
-	}
-
-	public void writeInfo() {
-		//Write new history and stuff to the file
-
-		String textFile = Integer.toString(accNum)+".txt";
-
-		try {
-
-			FileWriter out = new FileWriter(textFile);
-			BufferedWriter writeFile = new BufferedWriter(out);
-
-			writeFile.write(fName);
-			writeFile.newLine();
-			writeFile.write(lName);
-			writeFile.newLine();
-			writeFile.write(String.valueOf(accNum));
-			writeFile.newLine();
-			writeFile.write(String.valueOf(accPin));
-			writeFile.newLine();
-			writeFile.write(String.valueOf(balance));
-			writeFile.newLine();
-			writeFile.write("0");
-			for(int i = 0; i < 3 ; i++){
-				writeFile.write(answers[i] + " ");
-			}
-			if (transactionHistory.size() > 0) {
-				for (int i = 0; i < transactionHistory.size(); i++) {
-					writeFile.write(transactionHistory.get(i)+" ");
-				}
-			}
-
-			writeFile.close();
-			out.close();
-
-			System.out.println("Account Updated");
-		} catch (IOException e) {
-			System.err.println("IOException: " + e.getMessage());
 		}
 	}
 
