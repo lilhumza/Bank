@@ -133,11 +133,12 @@ public class BankTeller {
 			}
 			writeFile.newLine();
 			if (transactionHistory.size() == 0) {
-			writeFile.write("0");
+			writeFile.write("0 ");
 			}
 			else {
+				writeFile.write("0");
 				for (int i = 0; i < transactionHistory.size(); i++) {
-					writeFile.write(transactionHistory.get(i));
+					writeFile.write(transactionHistory.get(i) + " ");
 				}
 			}
 
@@ -231,7 +232,6 @@ public class BankTeller {
 	}
 
 	public void changeTransactionHistory() throws Exception {
-		System.out.println(transactionHistory);
 		if (transactionHistory.contains("0")) {
 			transactionHistory.remove("0");
 			if (transactionHistory.size() == 0){
