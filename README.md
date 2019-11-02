@@ -8,8 +8,8 @@
 - Seprate class for reading inputs
 - updateTransactionHistory to be redesigned to have less code
 
-#BankTeller
+# BankTeller
 
-#Bank
+# Bank
 
-#Account
+# Account
