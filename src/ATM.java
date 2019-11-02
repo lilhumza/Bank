@@ -7,36 +7,34 @@ public class ATM {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter pw = new PrintWriter(new OutputStreamWriter(System.out));
     static StringTokenizer st;
-	
+
     String storedAccountNumber;
     String storedPinNumber;
     boolean approved = false;
     boolean exit = false;
 
-    public ATM (int accountNumber, int pinNumber) throws IOException{
-        super();
-        this.exit = exit;
-        approveCredentials(accountNumber, pinNumber);
+    ArrayList<String> accountV = new ArrayList<String>();
 
+    public ATM (int accountNumber, int pinNumber) throws IOException{
     }
 
     public boolean approveCredentials(int accountNumber, int pinNumber){
-    	try{
-        ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-        storedAccountNumber = accountInfo.get(2);
-        storedPinNumber = accountInfo.get(3);
-        if (accountNumber == Integer.parseInt(storedAccountNumber)){
-            if (pinNumber == Integer.parseInt(storedPinNumber)){
-                return approved = true;
+        try{
+            readAccountInfo(accountNumber);
+            storedAccountNumber = accountV.get(2);
+            storedPinNumber = accountV.get(3);
+            if (accountNumber == Integer.parseInt(storedAccountNumber)){
+                if (pinNumber == Integer.parseInt(storedPinNumber)){
+                    return approved = true;
+                }
             }
+        }catch (Exception ignore){
         }
-    	}catch (Exception ignore){
-    	}
         return approved = false;
     }
 
     public String transactionHistory(int accountNumber, boolean t) throws IOException{
-        String fileName = Integer.toString(accountNumber) + ".txt";
+        String fileName = accountNumber + ".txt";
         String line = Files.readAllLines(Paths.get(fileName)).get(6);
         if (t){
             System.out.println("\nTransaction History\n" + line + "\n");
@@ -52,49 +50,56 @@ public class ATM {
         return bd.doubleValue();
     }
 
-    public void withdrawMoney(int accountNumber) throws IOException{
-        ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-        double balance =  Double.parseDouble(accountInfo.get(4));
+    public void W_D_Money(int accountNumber, boolean t) throws Exception{
+        double balance =  Double.parseDouble(accountV.get(4)); //get the banlance from accountV
         balance = round(balance, 2);
-        System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
-        double withdrawAmount = readDouble();
-        double newBalance = balance - withdrawAmount;
-        newBalance = round(newBalance,2);
-        updateBalance(accountNumber,5, Double.toString(newBalance));
-        System.out.println("You have successfully withdrawn " + withdrawAmount + ". Your new balance is now " + newBalance +"\n");
-        String history = "-" + Double.toString(withdrawAmount);
-        updateTransactionHistory(accountNumber, history);
-    }
 
-    public void depositMoney(int accountNumber) throws IOException{
-        ArrayList<String> accountInfo = readAccountInfo(accountNumber);
-        double balance =  Double.parseDouble(accountInfo.get(4));
-        balance = round(balance, 2);
-        System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
-        double depositAmount = readDouble();
-        double newBalance = balance + depositAmount;
-        newBalance = round(newBalance,2);
-        updateBalance(accountNumber,5, Double.toString(newBalance));
-        System.out.println("You have successfully deposited " + depositAmount + ". Your new balance is now " + newBalance + "\n");
-        String history = "+" + Double.toString(depositAmount);
-        updateTransactionHistory(accountNumber, history);
-    }
-
-    public ArrayList<String> readAccountInfo(int name) {
-        String fileName = Integer.toString(name) + ".txt";
-        ArrayList<String> accountValues = new ArrayList<String>();
-        String value;
-        try {
-            FileReader in = new FileReader(fileName);
-            BufferedReader readFile = new BufferedReader(in);
-            while ((value = readFile.readLine()) != null) {
-                accountValues.add(value);
-            }
-            readFile.close();
-            in.close();
-        } catch (Exception ignore) {
+        if (t){
+            System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
         }
-        return accountValues;
+        else{
+            System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
+        }
+
+        double amount = readDouble();
+        double newBalance;
+
+        if (t){
+            System.out.println("Your current balance is " + balance + ". How much would you like to withdraw?");
+            newBalance = balance - amount;
+        }
+        else{
+            System.out.println("Your current balance is " + balance + ". How much would you like to deposit?");
+            newBalance = balance + amount;
+        }
+
+        newBalance = round(newBalance,2);
+        updateBalance(accountNumber,5, Double.toString(newBalance));
+
+        String history;
+
+        if(t){
+            System.out.println("You have successfully withdrawn " + amount + ". Your new balance is now " + newBalance +"\n");
+            history = "-" + amount;
+        }
+        else{
+            System.out.println("You have successfully deposited " + amount + ". Your new balance is now " + newBalance + "\n");
+            history = "+" + Double.toString(amount);
+        }
+
+        updateTransactionHistory(accountNumber, history);
+
+    }
+
+
+    public ArrayList<String> readAccountInfo(int name) throws Exception{
+        BufferedReader br = new BufferedReader(new FileReader(Integer.toString(name) + ".txt")); //open file
+        String st;
+
+        while ((st = br.readLine()) != null){ //read file and save data into accountV
+            accountV.add(st);
+        }
+        return accountV;
     }
 
     public double exchangeCurrency(int type, double amount){
@@ -104,7 +109,7 @@ public class ATM {
             round(amount, 2);
             System.out.println("Converted to " + amount + " CAD");
         }
-        //cad to usd
+
         else{
             amount *= 0.76;
             round(amount, 2);
@@ -112,6 +117,8 @@ public class ATM {
         }
         return amount;
     }
+
+    
 
     public static void updateBalance(int accountNumber, int lineNumber, String data) throws IOException {
         Path path = Paths.get(Integer.toString(accountNumber) + ".txt");
@@ -147,27 +154,27 @@ public class ATM {
         String line = Files.readAllLines(Paths.get(fileName)).get(4);
         System.out.println("Your current balance is: " + line);
     }
-    
-	static String next () throws IOException {
-  	  while (st == null || !st.hasMoreTokens())
-  		  st = new StringTokenizer(br.readLine().trim());
-  	  return st.nextToken();
+
+    static String next () throws IOException {
+        while (st == null || !st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
     }
-    
-  static long readLong () throws IOException {
-  	  return Long.parseLong(next());
-  }
 
-  static int readInt () throws IOException {
-  	  return Integer.parseInt(next());
-  }
+    static long readLong () throws IOException {
+        return Long.parseLong(next());
+    }
 
-  static double readDouble () throws IOException {
-  	  return Double.parseDouble(next());
-  }
-    
-  static String readLine () throws IOException {
-  	  return br.readLine().trim();
-  } 
+    static int readInt () throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    static double readDouble () throws IOException {
+        return Double.parseDouble(next());
+    }
+
+    static String readLine () throws IOException {
+        return br.readLine().trim();
+    }
 
 }
